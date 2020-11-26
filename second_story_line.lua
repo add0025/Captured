@@ -90,14 +90,18 @@ function scene:create( event )
  
        counter = 1
        local switch = event.target
-       if(switch.text == "Prompt 1 Option 1: Sceam! There must be someone near by.") then 
-          option_text = "Card 2a"
+       if(switch.text == "Prompt 4b2 Option 1: Slowly walk through the house and look for any door that appears to open to the outside.") then 
+          option_text = "Card 7b"
           displayNextCard()
        
-       elseif (switch.text == "Prompt 2 Option 1:Try and reason again, there most be some heart left in this man!") then
-          print("hello")
-          option_text = "Card 3a"
-         displayNextCard()
+       elseif (switch.text == "Prompt 5b Option 1: Ignore it. It might be a trap.") then
+        local myData = "Card 7a"
+        local options ={
+
+           params ={type= myData}
+  
+        };
+        composer.gotoScene( "first_story_line" ,options )
  
        elseif (switch.text == "Prompt 3a Option 1: Cry, you are done for!") then
           print("hello")
@@ -247,7 +251,7 @@ function scene:create( event )
        if (aPrompt[counter].name == tostring(choose)) then
        print(aPrompt[counter].text)
        end --end of if
-       if (aPrompt[counter].name ~= tostring(choose)) then
+       if (aPrompt[counter].name ~= tostring(choose))  then
           aPrompt[counter].isVisible = false
           end --of if
        counter = counter + 1

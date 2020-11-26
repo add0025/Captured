@@ -12,8 +12,8 @@ local prompt_counter = 1
  local option_counter = 2
  local card_counter =1
  local option_text
- local choose
-
+ local choose=  "Card 1a"
+ local myData =  "Card 1a"
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -96,9 +96,16 @@ end--end of function
       elseif (switch.text == "Prompt 3a Option 1: Cry, you are done for!") then
          print("hello")
          option_text = "Card 3a"
+         displayNextCard()
+         
+      elseif (switch.text == "Prompt 1a Option 2: Demand your release. Who does this guy think he is?") then
+         print("hello")
+         option_text = "Card 2a"
+         displayNextCard()
+
       elseif (switch.text == "Prompt 3a Option 2: Now is your time to really remain calm. You know there must be a key or some pointy object to poke a hole in the duct tape. Look for it.") then
 --print("hello")
-         local myData = "Card 5b"
+         myData = "Card 5b"
          local options ={
 
             params ={type= myData}
@@ -110,26 +117,6 @@ end--end of function
 
        -- displayNextCard()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         
    end--end of if
 
 
@@ -209,37 +196,41 @@ end--end of function
 
    print(counter)
    counter = 1
-
+   if (event.params == nil) then
+      print("hello")
+   else
+   choose = event.params.type
+   end--end of if statement
 
       for _, aPrompt in ipairs(promptTable) do
 
-      if (aPrompt[counter].name == "Card 1a") then
+      if (aPrompt[counter].name ==tostring(choose)) then
       print(aPrompt[counter].text)
       end --end of if
-      if (aPrompt[counter].name ~= "Card 1a") then
+      if (aPrompt[counter].name ~=tostring(choose)) then
          aPrompt[counter].isVisible = false
          end --of if
       counter = counter + 1
-      if (aPrompt[counter].name == "Card 1a") then
+      if (aPrompt[counter].name == tostring(choose)) then
          print(aPrompt[counter].text)
          end --end of if
-         if (aPrompt[counter].name ~= "Card 1a") then
+         if (aPrompt[counter].name ~= tostring(choose)) then
             aPrompt[counter].isVisible = false
             end --of if
          counter = counter + 1
    
-         if (aPrompt[counter].name == "Card 1a") then
+         if (aPrompt[counter].name == tostring(choose)) then
             print(aPrompt[counter].text)
             end --end of if
-            if (aPrompt[counter].name ~= "Card 1a") then
+            if (aPrompt[counter].name ~= tostring(choose)) then
                aPrompt[counter].isVisible = false
                end --of if
             counter = counter + 1
    
-      if (aPrompt[counter].name == "Card 1a") then
+      if (aPrompt[counter].name == tostring(choose)) then
       print(aPrompt[counter].text)
       end --end of if
-      if (aPrompt[counter].name ~= "Card 1a") then
+      if (aPrompt[counter].name ~= tostring(choose)) then
          aPrompt[counter].isVisible = false
          end --of if
       counter = counter + 1
@@ -262,15 +253,173 @@ function scene:show( event )
  
    local sceneGroup = self.view
    local phase = event.phase
+
+
+
+   function displayNextCard()
+print("function 6")
+      for _, aPrompt in ipairs(promptTable) do
+   
+         if (aPrompt[counter].name == tostring(option_text)) then
+         print(aPrompt[counter].text)
+         aPrompt[counter].isVisible = true
+         end --end of if
+         if (aPrompt[counter].name ~= tostring(option_text)) then
+            aPrompt[counter].isVisible = false
+            end --of if
+         counter = counter + 1
+         if (aPrompt[counter].name == tostring(option_text)) then
+            print(aPrompt[counter].text)
+            aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+            aPrompt[counter].isVisible = true
+            end --end of if
+            if (aPrompt[counter].name ~= tostring(option_text)) then
+               aPrompt[counter].isVisible = false
+               end --of if
+            counter = counter + 1
+      
+            if (aPrompt[counter].name == tostring(option_text)) then
+               print(aPrompt[counter].text)
+               aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+               aPrompt[counter].isVisible = true
+               end --end of if
+               if (aPrompt[counter].name ~= tostring(option_text)) then
+                  aPrompt[counter].isVisible = false
+                  end --of if
+               counter = counter + 1
+      
+         if (aPrompt[counter].name == tostring(option_text)) then
+         print(aPrompt[counter].text)
+         aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+         aPrompt[counter].isVisible = true
+         end --end of if
+         if (aPrompt[counter].name ~= tostring(option_text)) then
+            aPrompt[counter].isVisible = false
+            end --of if
+         counter = counter + 1
+      end --end of for loop
+   
+   end--end of function
+   
+   
+   
+   
+   
+      --load the prompts from the csv file and put into table
+      function beginStoryLoop(event)
+   
+         counter = 1
+         local switch = event.target
+        --print(switch.text)
+         if(switch.text == "Prompt 6a Option 1: Hurry! This must be the outdoors! We made it, unlock the door with your key! ") then 
+            --print("hello")
+            option_text = "Card 8a"
+            displayNextCard()
+         
+         elseif (switch.text == " Prompt 7a  Option 1: Scream at the top of your lungs. Maybe, just maybe someone will hear your cries for help.") then
+            option_text = "Card 8a"
+           displayNextCard()
+   
+         elseif (switch.text == "  Prompt 7a2 Option 2: Well. This is it... Might as well explore, and become familiar with this place...") then
+            option_text = "Card 12a"
+            displayNextCard()
+
+
+         elseif (switch.text == "Prompt 3a Option 2: Now is your time to really remain calm. You know there must be a key or some pointy object to poke a hole in the duct tape. Look for it.") then
+   --print("hello")
+            myData = "Card 5b"
+            local options ={
+   
+               params ={type= myData}
+      
+            };
+            composer.gotoScene( "second_story_line" ,options )
+            -- do not miss the below line to avoid the event propagation
+            return true;
+   
+          -- displayNextCard()
+   
+         end--end of if
+
+
+
+      end--end of Begin StoryLoop
+
+
+
  
    if ( phase == "will" ) then
       -- Called when the scene is still off screen (but is about to come on screen).
+
+
+      counter = 1
+      if (event.params == nil) then
+         print("hello")
+      else
+      choose = event.params.type
+      print(choose)
+
+      end--end of if statement
+   
+         for _, aPrompt in ipairs(promptTable) do
+   
+         if (aPrompt[counter].name ==tostring(choose)) then
+         print(aPrompt[counter].text)
+         --aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+         aPrompt[counter].isVisible = true
+         end --end of if
+         if (aPrompt[counter].name ~=tostring(choose)) then
+            aPrompt[counter].isVisible = false
+            end --of if
+         counter = counter + 1
+         if (aPrompt[counter].name == tostring(choose)) then
+            print(aPrompt[counter].text)
+            aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+            aPrompt[counter].isVisible = true
+            end --end of if
+            if (aPrompt[counter].name ~= tostring(choose)) then
+               aPrompt[counter].isVisible = false
+               end --of if
+            counter = counter + 1
+      
+            if (aPrompt[counter].name == tostring(choose)) then
+               print(aPrompt[counter].text)
+               aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+               aPrompt[counter].isVisible = true
+               end --end of if
+               if (aPrompt[counter].name ~= tostring(choose)) then
+                  aPrompt[counter].isVisible = false
+                  end --of if
+               counter = counter + 1
+      
+         if (aPrompt[counter].name == tostring(choose)) then
+         print(aPrompt[counter].text)
+         aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+         aPrompt[counter].isVisible = true
+         end --end of if
+         if (aPrompt[counter].name ~= tostring(choose)) then
+            aPrompt[counter].isVisible = false
+            end --of if
+         counter = counter + 1
+      end --end of for loop
+      print(counter)
+  -- return;
+
+
+
+
+
+
    elseif ( phase == "did" ) then
+
       -- Called when the scene is now on screen.
       -- Insert code here to make the scene come alive.
       -- Example: start timers, begin animation, play audio, etc.
-   end
-end
+
+     
+
+   end --end of if
+end --end of show function
  
 -- "scene:hide()"
 function scene:hide( event )
@@ -283,6 +432,9 @@ function scene:hide( event )
       -- Insert code here to "pause" the scene.
       -- Example: stop timers, stop animation, stop audio, etc.
    elseif ( phase == "did" ) then
+
+
+
       -- Called immediately after scene goes off screen.
    end
 end
