@@ -95,11 +95,19 @@ end--end of function
       elseif (switch.text == "Prompt 3a Option 1: Cry, you are done for!") then
          print("hello")
          option_text = "Card 3a"
-      elseif (switch.text == "Prompt 3a Option 1: Cry, you are done for!") then
-         print("hello")
-         option_text = "Card 3a"
+      elseif (switch.text == "Prompt 3a Option 2: Now is your time to really remain calm. You know there must be a key or some pointy object to poke a hole in the duct tape. Look for it.") then
 
-        displayNextCard()
+         local myData = "prompt 4b(to be continued"
+         local options ={
+
+            params ={type= myData}
+   
+         };
+         composer.gotoScene( "second_story_line" ,options )
+         -- do not miss the below line to avoid the event propagation
+         return true;
+
+       -- displayNextCard()
 
 
 
