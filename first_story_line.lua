@@ -11,6 +11,7 @@ local counter = 1
 local prompt_counter = 1
  local option_counter = 2
  local card_counter =1
+ local option_text
 
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
@@ -26,23 +27,136 @@ function scene:create( event )
  
    local sceneGroup = self.view
 
+
+
+function displayNextCard()
+
+   for _, aPrompt in ipairs(promptTable) do
+
+      if (aPrompt[counter].name == tostring(option_text)) then
+      print(aPrompt[counter].text)
+      aPrompt[counter].isVisible = true
+      end --end of if
+      if (aPrompt[counter].name ~= tostring(option_text)) then
+         aPrompt[counter].isVisible = false
+         end --of if
+      counter = counter + 1
+      if (aPrompt[counter].name == tostring(option_text)) then
+         print(aPrompt[counter].text)
+         aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+         aPrompt[counter].isVisible = true
+         end --end of if
+         if (aPrompt[counter].name ~= tostring(option_text)) then
+            aPrompt[counter].isVisible = false
+            end --of if
+         counter = counter + 1
+   
+         if (aPrompt[counter].name == tostring(option_text)) then
+            print(aPrompt[counter].text)
+            aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+            aPrompt[counter].isVisible = true
+            end --end of if
+            if (aPrompt[counter].name ~= tostring(option_text)) then
+               aPrompt[counter].isVisible = false
+               end --of if
+            counter = counter + 1
+   
+      if (aPrompt[counter].name == tostring(option_text)) then
+      print(aPrompt[counter].text)
+      aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+      aPrompt[counter].isVisible = true
+      end --end of if
+      if (aPrompt[counter].name ~= tostring(option_text)) then
+         aPrompt[counter].isVisible = false
+         end --of if
+      counter = counter + 1
+   end --end of for loop
+
+end--end of function
+
+
+
+
+
    --load the prompts from the csv file and put into table
- 
+   function beginStoryLoop(event)
+
+      counter = 1
+      local switch = event.target
+      if(switch.text == "Prompt 1 Option 1: Sceam! There must be someone near by.") then 
+         option_text = "Card 2a"
+         displayNextCard()
+      
+      elseif (switch.text == "Prompt 2 Option 1:Try and reason again, there most be some heart left in this man!") then
+         print("hello")
+         option_text = "Card 3a"
+        displayNextCard()
+
+      elseif (switch.text == "Prompt 3a Option 1: Cry, you are done for!") then
+         print("hello")
+         option_text = "Card 3a"
+      elseif (switch.text == "Prompt 3a Option 1: Cry, you are done for!") then
+         print("hello")
+         option_text = "Card 3a"
+
+        displayNextCard()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+   end--end of if
+
+
+
+   end--end of Begin StoryLoop
+   
+
+
+
+
    for field  in f:lines() do
 
-      if field[1] == 'Prompts' and field[2] == 'Option 1' then
+      if field[1] == 'Prompts' and field[2] == 'Option 1' 
+      and field[3] == 'Option 2' and field[4] == 'Option 3' then
          local promptHeader = field[1]
          local option1Header = field[2]
+         local option2Header = field[3]
+         local option3Header = field[4]
+
          print(promptHeader)
          print(option1Header)
+         print(option2Header)
+         print(option3Header)
+
       else
       local prompt  =display.newText(field[1], display.contentCenterX, 5, 200, 0, native.systemFont,20)
-      local option1 =display.newText(field[2], display.contentCenterX, 300, 200, 0, native.systemFont,20)
+      local option1 =display.newText(field[2], display.contentCenterX, 200, 200, 0, native.systemFont,15)
+      local option2 =display.newText(field[3], display.contentCenterX, 300, 200, 0, native.systemFont,15)
+      local option3 =display.newText(field[4], display.contentCenterX, 400, 200, 0, native.systemFont,15)
 
      -- print (prompt.text)
      -- print (option1.text)
      cardGroup:insert(prompt)
      cardGroup:insert(option1)
+     cardGroup:insert(option2)
+     cardGroup:insert(option3)
       table.insert( promptTable ,  cardGroup )
       end --end of if statement
      -- print(field[1])
@@ -59,18 +173,31 @@ function scene:create( event )
    --print(aPrompt[counter].text)
    counter = counter + 1
   aPrompt[counter].name = "Card " .. card_counter .. "a";
+  aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
   --print(aPrompt[counter].name)
    --print (aPrompt[counter].text)
    counter = counter + 1
+   aPrompt[counter].name = "Card " .. card_counter .. "a";
+   aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+   --print(aPrompt[counter].name)
+    --print (aPrompt[counter].text)
+    counter = counter + 1
+    aPrompt[counter].name = "Card " .. card_counter .. "a";
+    aPrompt[counter]: addEventListener( "tap", beginStoryLoop )
+    --print(aPrompt[counter].name)
+     --print (aPrompt[counter].text)
+     counter = counter + 1
+
+   
    card_counter =card_counter+1
 
    end --end of for loop
    print(counter)
    counter = 1
 
-   ----function BeginStory()
 
       for _, aPrompt in ipairs(promptTable) do
+
       if (aPrompt[counter].name == "Card 1a") then
       print(aPrompt[counter].text)
       end --end of if
@@ -79,27 +206,35 @@ function scene:create( event )
          end --of if
       counter = counter + 1
       if (aPrompt[counter].name == "Card 1a") then
+         print(aPrompt[counter].text)
+         end --end of if
+         if (aPrompt[counter].name ~= "Card 1a") then
+            aPrompt[counter].isVisible = false
+            end --of if
+         counter = counter + 1
+   
+         if (aPrompt[counter].name == "Card 1a") then
+            print(aPrompt[counter].text)
+            end --end of if
+            if (aPrompt[counter].name ~= "Card 1a") then
+               aPrompt[counter].isVisible = false
+               end --of if
+            counter = counter + 1
+   
+      if (aPrompt[counter].name == "Card 1a") then
       print(aPrompt[counter].text)
       end --end of if
       if (aPrompt[counter].name ~= "Card 1a") then
          aPrompt[counter].isVisible = false
          end --of if
       counter = counter + 1
-
-
-
-
-
    end --end of for loop
    print(counter)
 
 
---end --end of BeginStory funciton
-
---Runtime:addEventListener( "enterFrame", BeginStory, 1)
 
 
---load in the options
+
 
 
    
