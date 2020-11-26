@@ -27,6 +27,8 @@ function scene:create( event )
  
    local sceneGroup = self.view
  
+   local prompt  =display.newText("Entered Scene 2", display.contentCenterX, 5, 200, 0, native.systemFont,100)
+
    -- Initialize the scene here.
    -- Example: add display objects to "sceneGroup", add touch listeners, etc.
 end

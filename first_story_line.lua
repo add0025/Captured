@@ -96,7 +96,7 @@ end--end of function
          print("hello")
          option_text = "Card 3a"
       elseif (switch.text == "Prompt 3a Option 2: Now is your time to really remain calm. You know there must be a key or some pointy object to poke a hole in the duct tape. Look for it.") then
-
+print("hello")
          local myData = "prompt 4b(to be continued"
          local options ={
 
@@ -158,7 +158,7 @@ end--end of function
       local option1 =display.newText(field[2], display.contentCenterX, 200, 200, 0, native.systemFont,15)
       local option2 =display.newText(field[3], display.contentCenterX, 300, 200, 0, native.systemFont,15)
       local option3 =display.newText(field[4], display.contentCenterX, 400, 200, 0, native.systemFont,15)
-
+      
      -- print (prompt.text)
      -- print (option1.text)
      cardGroup:insert(prompt)
@@ -166,11 +166,14 @@ end--end of function
      cardGroup:insert(option2)
      cardGroup:insert(option3)
       table.insert( promptTable ,  cardGroup )
+      sceneGroup:insert(cardGroup)
+
       end --end of if statement
      -- print(field[1])
   
   end --end of for loop
-
+  --
+  
 
   --lable the prompts within the table
    
@@ -200,6 +203,9 @@ end--end of function
    card_counter =card_counter+1
 
    end --end of for loop
+
+   
+
    print(counter)
    counter = 1
 
