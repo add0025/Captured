@@ -12,6 +12,7 @@ local prompt_counter = 1
  local option_counter = 2
  local card_counter =1
  local option_text
+ local choose
 
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
@@ -96,8 +97,8 @@ end--end of function
          print("hello")
          option_text = "Card 3a"
       elseif (switch.text == "Prompt 3a Option 2: Now is your time to really remain calm. You know there must be a key or some pointy object to poke a hole in the duct tape. Look for it.") then
-print("hello")
-         local myData = "prompt 4b(to be continued"
+--print("hello")
+         local myData = "Card 5b"
          local options ={
 
             params ={type= myData}
