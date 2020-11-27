@@ -463,6 +463,70 @@ print("function 6")
             option_text = "Card 5a"
             displayNextCard()
 
+
+
+
+
+
+
+         elseif (switch.text == "Prompt 8a  Option 1: Read it! (If the user chooses not to the item will be placed in their inventory)") then
+            option_text = "Card 11a"
+            displayNextCard()
+
+         elseif (switch.text == "Prompt 8a  Option 2: Continue exploring. See if you can find any other clues.") then
+            option_text = "Card 9a"
+            displayNextCard()
+
+         elseif (switch.text == " Prompt 8a  Option 3: Well now that the bed room's checked, time to see what that door is about.") then
+            option_text = "Card 8a"
+            displayNextCard()
+
+
+
+
+
+         elseif (switch.text == "Prompt 10a  Option 1: Continue exploring. See if you can find any other clues.") then
+            option_text = "Card 9a"
+            displayNextCard()
+
+         elseif (switch.text == "Prompt 10a  Option 2: Well now that the bed room's checked, time to see what that door is about.") then
+            option_text = "Card 8a"
+            displayNextCard()
+
+
+
+
+
+
+
+
+
+
+
+
+         elseif (switch.text == "Prompt 11a  Option 1: This man is pathetic.Grab an item in your inventory and CHARGE!") then
+            option_text = "Card 12a"
+            displayNextCard()
+
+         elseif (switch.text == "Prompt 11a  Option 2: Run around past him and go back outside the basement to find another opening. another door ther must be one.") then
+            option_text = "Card 12a"
+            displayNextCard()
+
+         elseif (switch.text == "Prompt 11a  Option 3: The door the keypad. the pattern on the wall. Maybe if I type it in it'll open the door and I will be out of here!  (will be locked if  wall was never seen)") then
+            option_text = "Card 12a"
+            displayNextCard()
+
+
+
+
+
+
+
+
+
+
+
+
          elseif (switch.text == "Prompt 4a2 Option 2: Search for a key to unlock the room you have been placed in.") then
             myData = "Card 4b"
             local options ={
