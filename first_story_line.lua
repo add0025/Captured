@@ -103,8 +103,139 @@ end--end of function
          option_text = "Card 2a"
          displayNextCard()
 
+      elseif (switch.text == "Prompt 2 Option 2: Quick! theres a door to the left of the room, while he's turned around run and find the nearest exit!") then
+        -- print("hello")
+         option_text = "Card 2a"
+         displayNextCard()
+
+
+
+      elseif (switch.text == "Prompt 6a Option 2: Cerials bedroom apears to be next door. Maybe if you go inside you'll find some clues on who this man really is.") then
+         -- print("hello")
+          option_text = "Card 10a"
+          displayNextCard()
+
+
+
+         elseif (switch.text == "Prompt 6a Option 3: Too good to be true! No way that is a way out, search some more.") then
+            -- print("hello")
+             option_text = "Card 9a"
+             displayNextCard()
+
+
+
+
+
+
+elseif (switch.text == "Prompt 7a2  Option 1: Scream at the top of your lungs. Maybe, just maybe someone will hear your cries for help.") then
+         -- print("hello")
+          option_text = "Card 9a"
+          displayNextCard()
+
+
+
+elseif (switch.text == "Prompt 7a2 Option 2: Well. This is it. Might as well explore, and become familiar with this place.") then
+         -- print("hello")
+          option_text = "Card 12a"
+          displayNextCard()
+
+
+
+
+
+
+
+
+
+      elseif (switch.text == "Prompt 5a Option 1: Slowly walk through the house and look for any door that appears to open to the outside.") then
+         myData = "Card 7b"
+         local options ={
+
+            params ={type= myData}
+   
+         };
+         composer.gotoScene( "second_story_line" ,options )
+         -- do not miss the below line to avoid the event propagation
+         return true;
+
+
+
+      elseif (switch.text == "Prompt 5a Option 2: Look for any object that looks like it could make a good weapon, Cerial could come back at any time.") then
+         myData = "Card 8b"
+         local options ={
+
+            params ={type= myData}
+   
+         };
+         composer.gotoScene( "second_story_line" ,options )
+         -- do not miss the below line to avoid the event propagation
+         return true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     elseif (switch.text == "Prompt 1 Option 3: Reason with the man. Ask him to let you go. he is clearly ill, maybe he has mistaken you for someone else.") then
+         myData = "Card 2b"
+         local options ={
+
+            params ={type= myData}
+   
+         };
+         composer.gotoScene( "second_story_line" ,options )
+         -- do not miss the below line to avoid the event propagation
+         return true;
+
+
+
+
+
+      elseif (switch.text == "Prompt 2 Option 3: Stay put. You gotta start thinking stuff out, and try and not do anything drastic.") then
+         myData = "Card 3b"
+         local options ={
+
+            params ={type= myData}
+   
+         };
+         composer.gotoScene( "second_story_line" ,options )
+         -- do not miss the below line to avoid the event propagation
+         return true;
+
+
+      elseif (switch.text == "Prompt 3a Option 3: Scanning the dim room, you see a bucket under a hole in the cieling. It must be a water leakage! dip your hands in the bucket to loosen your hands and squirm free!") then
+
+         myData = "Card 6b"
+         local options ={
+
+            params ={type= myData}
+   
+         };
+         composer.gotoScene( "second_story_line" ,options )
+         -- do not miss the below line to avoid the event propagation
+         return true;
+
+
+
       elseif (switch.text == "Prompt 3a Option 2: Now is your time to really remain calm. You know there must be a key or some pointy object to poke a hole in the duct tape. Look for it.") then
---print("hello")
+
          myData = "Card 5b"
          local options ={
 
@@ -142,10 +273,10 @@ end--end of function
          print(option3Header)
 
       else
-      local prompt  =display.newText(field[1], display.contentCenterX, 5, 200, 0, native.systemFont,20)
-      local option1 =display.newText(field[2], display.contentCenterX, 200, 200, 0, native.systemFont,15)
-      local option2 =display.newText(field[3], display.contentCenterX, 300, 200, 0, native.systemFont,15)
-      local option3 =display.newText(field[4], display.contentCenterX, 400, 200, 0, native.systemFont,15)
+      local prompt  =display.newText(field[1], display.contentCenterX, 5, 200, 0, native.systemFont,10)
+      local option1 =display.newText(field[2], display.contentCenterX, 200, 200, 0, native.systemFont,8)
+      local option2 =display.newText(field[3], display.contentCenterX, 300, 200, 0, native.systemFont,8)
+      local option3 =display.newText(field[4], display.contentCenterX, 400, 200, 0, native.systemFont,8)
       
      -- print (prompt.text)
      -- print (option1.text)
@@ -320,9 +451,42 @@ print("function 6")
             option_text = "Card 8a"
            displayNextCard()
    
-         elseif (switch.text == "  Prompt 7a2 Option 2: Well. This is it... Might as well explore, and become familiar with this place...") then
+         elseif (switch.text == "  Prompt 7a Option 2: Well. This is it... Might as well explore, and become familiar with this place...") then
             option_text = "Card 12a"
             displayNextCard()
+
+         elseif (switch.text == "Prompt 4a Option 1: Stay put, you don' know when Cerial will return .") then
+            option_text = "Card 4a"
+            displayNextCard()
+
+         elseif (switch.text == "Prompt 4a2 Option 1: Stay put, you don' know when Cerial will return .") then
+            option_text = "Card 5a"
+            displayNextCard()
+
+         elseif (switch.text == "Prompt 4a2 Option 2: Search for a key to unlock the room you have been placed in.") then
+            myData = "Card 4b"
+            local options ={
+   
+               params ={type= myData}
+      
+            };
+            composer.gotoScene( "second_story_line" ,options )
+            -- do not miss the below line to avoid the event propagation
+            return true;
+
+
+         elseif (switch.text == "Prompt 4a Option 2: Search for a key to unlock the room you have been placed in.") then
+            myData = "Card 4b"
+            local options ={
+   
+               params ={type= myData}
+      
+            };
+            composer.gotoScene( "second_story_line" ,options )
+            -- do not miss the below line to avoid the event propagation
+            return true;
+
+
 
 
          elseif (switch.text == "Prompt 3a Option 2: Now is your time to really remain calm. You know there must be a key or some pointy object to poke a hole in the duct tape. Look for it.") then
