@@ -15,4 +15,4 @@ local composer = require("composer")
 display.setStatusBar(display.HiddenStatusBar)
 
 composer.gotoScene("first_story_line")
-
+--composer.gotoScene("keypadscene")

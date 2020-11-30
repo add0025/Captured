@@ -15,6 +15,7 @@ local prompt_counter = 1
  local choose=  "Card 1a"
  local myData =  "Card 1a"
  local widget = require( "widget" )
+-- local keyboard = require("onScreenKeyboard")
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -32,6 +33,7 @@ function scene:create( event )
 
    local background = display.newImageRect( "captured_1.png", display.contentWidth+100, display.contentHeight+200 )
    background.y=-100
+   background.x =-100
    background.anchorX= 0
    background.anchorY= 0
    --background.xScale = display.contentWidth/background.width
@@ -44,6 +46,9 @@ function scene:create( event )
    myImage.alpha =0.75
    sceneGroup:insert(myImage)
 
+
+
+   
 
 local function handleButtonEvent ( event )
 
@@ -438,7 +443,7 @@ elseif (switch.text == "Prompt 7a2 Option 2: Well. This is it. Might as well exp
 
 
 
-      prompt:setFillColor( 0, 0, 0 )
+      prompt:setFillColor( 0.5, 0.5, 0.5 )
       option1:setFillColor( 0, 0, 0 )
       option2:setFillColor( 0, 0, 0 )
       option3:setFillColor( 0, 0, 0 )
