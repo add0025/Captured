@@ -17,6 +17,7 @@ local myData
 local special_eleven_prompt
 local option1_11
 local widget = require( "widget" )
+local endingDeterminerText = ' ';
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -31,7 +32,121 @@ function scene:create( event )
  
    local sceneGroup = self.view
  
+   local background = display.newImageRect( "captured_1.png", display.contentWidth+100, display.contentHeight+200 )
+   background.y=-100
+   background.x =-100
+   background.anchorX= 0
+   background.anchorY= 0
+   --background.xScale = display.contentWidth/background.width
+  -- background.yScale = display.contentHeight/background.height  
+   sceneGroup:insert(background)
 
+
+   local myImage = display.newImage( "prompt3.png", 150,100 )
+   myImage.y = 80
+   myImage.alpha =0.75
+   sceneGroup:insert(myImage)
+
+
+
+   
+
+local function handleButtonEvent ( event )
+
+if ("ended" == event.phase) then 
+   print ("Buton pressed.")
+
+end --end of if
+
+
+
+end --end of handleButtonEvent
+
+
+
+
+   local radioGroup= display.newGroup()
+
+  -- local buttonSheet = graphics.newImageSheet("captured_3.png")
+
+   local button1 = widget.newButton(
+       {
+       left = -75,
+       top = 210,
+       id = "button_1",
+       width = 480,
+       height = 480,
+       defaultFile = "captured_5.png",
+       overFile = "captured_5.png",
+       --label = "button",
+
+       onEvent = handleButtonEvent} )
+   radioGroup:insert( button1 )
+
+
+
+
+
+   local button2 = widget.newButton(
+      {
+      left = -75,
+      top = 120,
+      id = "button_2",
+      width = 480,
+      height = 480,
+      defaultFile = "captured_5.png",
+      overFile = "captured_5.png",
+      --label = "button",
+
+      onEvent = handleButtonEvent} )
+  radioGroup:insert( button2 )
+
+
+
+
+
+
+
+
+  local button3 = widget.newButton(
+   {
+   left = -75,
+   top = 30,
+   id = "button_3",
+   width = 480,
+   height = 480,
+   defaultFile = "captured_5.png",
+   overFile = "captured_5.png",
+   --label = "button",
+
+   onEvent = handleButtonEvent} )
+radioGroup:insert( button3 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   sceneGroup:insert(button1)
+   sceneGroup:insert(button2)
+   sceneGroup:insert(button3)
 
 
 
@@ -192,10 +307,18 @@ function scene:create( event )
           print(option3Header)
  
        else
-       local prompt  =display.newText(field[1], display.contentCenterX, 5, 200, 0, native.systemFont,20)
-       local option1 =display.newText(field[2], display.contentCenterX, 200, 200, 0, native.systemFont,15)
-       local option2 =display.newText(field[3], display.contentCenterX, 300, 200, 0, native.systemFont,15)
-       local option3 =display.newText(field[4], display.contentCenterX, 500, 200, 0, native.systemFont,15)
+         local prompt  =display.newText(field[1], display.contentCenterX, -50, 300, 0,"edo.ttf",15)
+         local option1 =display.newText(field[2], display.contentCenterX, 257, 200, 0, "edo.ttf",12)
+         local option2 =display.newText(field[3], display.contentCenterX, 350, 200, 0, "edo.ttf",12)
+         local option3 =display.newText(field[4], display.contentCenterX, 450, 200, 0, "edo.ttf",12)
+         
+   
+   
+   
+         prompt:setFillColor( 0.5, 0.5, 0.5 )
+         option1:setFillColor( 0, 0, 0 )
+         option2:setFillColor( 0, 0, 0 )
+         option3:setFillColor( 0, 0, 0 )
        
       -- print (prompt.text)
       -- print (option1.text)
@@ -396,6 +519,13 @@ function scene:show( event )
                displayNextCard()
 
 
+
+            elseif (switch.text == "Prompt 4b Option 1: Slowly walk through the house and look for any door that appears to open to the outside.") then
+               option_text = "Card 7b"
+               displayNextCard()
+
+
+
             elseif (switch.text == "Prompt 4b Option 2: Look for any object that looks like it could make a good weapon, Cerial could come back at any time.") then
                 option_text = "Card 8b"
                displayNextCard()
@@ -561,10 +691,36 @@ elseif (switch.text == 'Prompt 7b Option 1: "Are you alright? Who are you?"') th
                displayNextCard()
 
 
+
+
+
+
+
+
+
+
             elseif (switch.text == 'Prompt 15b  Option 3: The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it will open the door and we will be out of here!  (will be locked if Kimerly never gave the pattern to user)') then
-               -- option_text = "Card 19b"
+               endingDeterminerText = switch.text
+               --myData = tostring(endingDeterminerText)
+              -- option_text = tostring(endingDeterminerText)
                --displayNextCard()
+               --composer.gotoScene( "keypadscene" ,options )
+
+
+               myData =  tostring(endingDeterminerText)
+               local options ={
+      
+                  params ={type= myData}
+         
+               };
                composer.gotoScene( "keypadscene" ,options )
+               -- do not miss the below line to avoid the event propagation
+               return true;
+
+
+
+
+
 
 
             elseif (switch.text == 'Prompt 14b Option 1: Read it! (If the user chooses not to the item will be placed in their inventory). Interesting. Now time to get out of here') then
