@@ -15,6 +15,7 @@ local prompt_counter = 1
  local choose=  "Card 1a"
  local myData =  "Card 1a"
  local widget = require( "widget" )
+ local endingDeterminerText = ' ';
 -- local keyboard = require("onScreenKeyboard")
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
@@ -682,10 +683,22 @@ print("function 6")
             displayNextCard()
 
          elseif (switch.text == "Prompt 11a  Option 3: The door the keypad. the pattern on the wall. Maybe if I type it in it'll open the door and I will be out of here!  (will be locked if  wall was never seen)") then
-         --   option_text = "Card 12a"
-           -- displayNextCard()
-           composer.gotoScene( "keypadscene" ,options )
+            endingDeterminerText = switch.text
+            --myData = tostring(endingDeterminerText)
+           -- option_text = tostring(endingDeterminerText)
+            --displayNextCard()
+            --composer.gotoScene( "keypadscene" ,options )
 
+
+            myData =  tostring(endingDeterminerText)
+            local options ={
+   
+               params ={type= myData}
+      
+            };
+            composer.gotoScene( "keypadscene" ,options )
+            -- do not miss the below line to avoid the event propagation
+            return true;
 
 
 

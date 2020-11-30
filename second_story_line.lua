@@ -748,9 +748,22 @@ elseif (switch.text == 'Prompt 7b Option 1: "Are you alright? Who are you?"') th
                displayNextCard()
 
             elseif (switch.text == 'Prompt 16b  Option 3: The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it will open the door and I willl be able to get help for Kimberly!(will be locked if Kimerly never gave the pattern to user)') then
-                --option_text = "Card 20b"
-              -- displayNextCard() 
-              composer.gotoScene( "keypadscene" ,options )
+               endingDeterminerText = switch.text
+               --myData = tostring(endingDeterminerText)
+              -- option_text = tostring(endingDeterminerText)
+               --displayNextCard()
+               --composer.gotoScene( "keypadscene" ,options )
+
+
+               myData =  tostring(endingDeterminerText)
+               local options ={
+      
+                  params ={type= myData}
+         
+               };
+               composer.gotoScene( "keypadscene" ,options )
+               -- do not miss the below line to avoid the event propagation
+               return true;
 
 
 

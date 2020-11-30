@@ -391,15 +391,53 @@ function scene:show( event )
 
 
 
+--KIMBERLY IS CAPTURED BY CERIAL WHEN TRYIGN TO ESCAPE
 
 
 
 
+if (tostring(clicked_password) == tostring(correct_password)) then
+
+   if (tostring(choose) == "Prompt 16b  Option 3: The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it will open the door and I willl be able to get help for Kimberly!(will be locked if Kimerly never gave the pattern to user)") then
+   composer.gotoScene("SceneWin2")
+   end --end of inner if
+   
+end
+   
+   
+   if (tostring(clicked_password) ~= tostring(correct_password)) then
+
+      if (tostring(choose) == "Prompt 16b  Option 3: The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it will open the door and I willl be able to get help for Kimberly!(will be locked if Kimerly never gave the pattern to user)") then
+         composer.gotoScene("SceneEnd2")
+         end --end of inner if
+   
+   
+   end-- end of if/elseif statement
 
 
 
 
+--NO KIMBERLY
 
+
+
+if (tostring(clicked_password) == tostring(correct_password)) then
+
+   if (tostring(choose) == "Prompt 11a  Option 3: The door the keypad. the pattern on the wall. Maybe if I type it in it'll open the door and I will be out of here!  (will be locked if  wall was never seen)") then
+   composer.gotoScene("SceneWin3")
+   end --end of inner if
+   
+end
+   
+   
+   if (tostring(clicked_password) ~= tostring(correct_password)) then
+
+      if (tostring(choose) == "Prompt 11a  Option 3: The door the keypad. the pattern on the wall. Maybe if I type it in it'll open the door and I will be out of here!  (will be locked if  wall was never seen)") then
+         composer.gotoScene("SceneEnd3")
+         end --end of inner if
+   
+   
+   end-- end of if/elseif statement
 
 
 

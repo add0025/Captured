@@ -2,6 +2,7 @@
 local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require('widget')
+local kimberlyCapturedWin = "CONGRATULATIONS YOU HAVE BEAT THE GAME AND CERIAL! YOU WERE ABLE TO NARROWLY ESCAPE THE GRASP OF CERIAL THE SERIAL KILLER. YOUR RUN TO FIND HELP FOR KIMBERLY BUT UNFORTUNATELY IT IS TOO LATE, CERIAL GOT THE BEST OF HER... EVEN THOUGH KIMBERLY DID NOT  HAVE A HAPPY ENDING TO HER 10 YEAR HOSTAGE SITUATION, HER FAMILY CAN FINALLY SLEEP AT NIGHT KNOWING WHAT HAPPENED TO THEIR DEAR DAUGHTER... YOU HAVE WON THE GAME. "
 
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
@@ -17,14 +18,14 @@ function scene:create( event )
  
    local sceneGroup = self.view
 
-   local background = display.newImageRect("MusicAndScreens/WinScene.png", display.contentWidth + 450, display.contentHeight + 500)
-   local TitleText = display.newText('You Win!!!', display.contentCenterX, display.contentCenterY, native.systemFont, 50)
+   --local background = display.newImageRect("MusicAndScreens/WinScene.png", display.contentWidth + 450, display.contentHeight + 500)
+   local TitleText = display.newText(kimberlyCapturedWin, display.contentCenterX, display.contentCenterY, native.systemFont, 50)
 
 
 
    TitleText:setFillColor(1.0, 0.0, 0.0)
 
-   sceneGroup:insert(background)
+   --sceneGroup:insert(background)
    sceneGroup:insert(TitleText)
 
    
