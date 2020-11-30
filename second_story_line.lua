@@ -16,6 +16,7 @@ local prompt_counter = 1
 local myData
 local special_eleven_prompt
 local option1_11
+local widget = require( "widget" )
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
