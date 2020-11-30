@@ -562,8 +562,9 @@ elseif (switch.text == 'Prompt 7b Option 1: "Are you alright? Who are you?"') th
 
 
             elseif (switch.text == 'Prompt 15b  Option 3: The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it will open the door and we will be out of here!  (will be locked if Kimerly never gave the pattern to user)') then
-                option_text = "Card 19b"
-               displayNextCard()
+               -- option_text = "Card 19b"
+               --displayNextCard()
+               composer.gotoScene( "keypadscene" ,options )
 
 
             elseif (switch.text == 'Prompt 14b Option 1: Read it! (If the user chooses not to the item will be placed in their inventory). Interesting. Now time to get out of here') then
@@ -591,8 +592,9 @@ elseif (switch.text == 'Prompt 7b Option 1: "Are you alright? Who are you?"') th
                displayNextCard()
 
             elseif (switch.text == 'Prompt 16b  Option 3: The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it will open the door and I willl be able to get help for Kimberly!(will be locked if Kimerly never gave the pattern to user)') then
-                option_text = "Card 20b"
-               displayNextCard() 
+                --option_text = "Card 20b"
+              -- displayNextCard() 
+              composer.gotoScene( "keypadscene" ,options )
 
 
 

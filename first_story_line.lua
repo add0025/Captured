@@ -682,8 +682,9 @@ print("function 6")
             displayNextCard()
 
          elseif (switch.text == "Prompt 11a  Option 3: The door the keypad. the pattern on the wall. Maybe if I type it in it'll open the door and I will be out of here!  (will be locked if  wall was never seen)") then
-            option_text = "Card 12a"
-            displayNextCard()
+         --   option_text = "Card 12a"
+           -- displayNextCard()
+           composer.gotoScene( "keypadscene" ,options )
 
 
 
