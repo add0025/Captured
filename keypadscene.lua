@@ -3,6 +3,7 @@ local scene = composer.newScene()
 local correct_password ="6135831"
 local clicked_password=""
 local widget = require( "widget" )
+local button_sound = audio.loadSound("button-28.wav");
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -44,12 +45,14 @@ local switch = event.target
 
             clicked_password = clicked_password .. "0"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
         if (switch.id =="1")then
 
             clicked_password = clicked_password .. "1"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
 
@@ -57,6 +60,7 @@ local switch = event.target
 
             clicked_password = clicked_password .. "2"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
 
@@ -64,42 +68,49 @@ local switch = event.target
 
             clicked_password = clicked_password .. "3"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
         if (switch.id =="4")then
 
             clicked_password = clicked_password .. "4"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
         if (switch.id =="5")then
 
             clicked_password = clicked_password .. "5"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
         if (switch.id =="6")then
 
             clicked_password = clicked_password .. "6"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
         if (switch.id =="7")then
 
             clicked_password = clicked_password .. "7"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
         if (switch.id =="8")then
 
             clicked_password = clicked_password .. "8"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
         if (switch.id =="9")then
 
             clicked_password = clicked_password .. "9"
             print(clicked_password)
+            audio.play(button_sound)
 
         end
     
