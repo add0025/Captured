@@ -229,8 +229,27 @@ radioGroup:insert( button3 )
          return true;
 
        elseif(switch.text == "Prompt 2b Option 2: Quick! theres a door to the left of the room, while he's turned around run and find the nearest exit!") then
-        option_text = "Card 2b"
-        displayNextCard()
+         endingDeterminerText = switch.text
+         --myData = tostring(endingDeterminerText)
+        -- option_text = tostring(endingDeterminerText)
+         --displayNextCard()
+         --composer.gotoScene( "keypadscene" ,options )
+      
+      
+         myData =  tostring(endingDeterminerText)
+         local options ={
+      
+            params ={type= myData}
+      
+         };
+         composer.gotoScene( "SceneEnd9" ,options )
+         -- do not miss the below line to avoid the event propagation
+         return true;
+
+
+
+
+
 
        elseif (switch.text == "Prompt 2b Option 3: Stay put. You gotta start thinking stuff out, and try and not do anything drastic.") then
           
@@ -531,6 +550,46 @@ function scene:show( event )
                displayNextCard()
 
 
+            elseif (switch.text == "Prompt 4b2 Option 2: Look for any object that looks like it could make a good weapon, Cerial could come back at any time.") then
+               option_text = "Card 8b"
+              displayNextCard()
+
+
+
+            elseif (switch.text == "Prompt 4b3 Option 1: Slowly walk through the house and look for any door that appears to open to the outside.") then
+               option_text = "Card 7b"
+              displayNextCard()
+            elseif (switch.text == "Prompt 4b3 Option 2: Look for any object that looks like it could make a good weapon, Cerial could come back at any time.") then
+               option_text = "Card 8b"
+              displayNextCard()
+            elseif (switch.text == "Prompt 4b Option 3: Search the house for a phone and call the police immediately.") then
+               myData = "Card 6a"
+                local options ={
+       
+                   params ={type= myData}
+          
+                };
+                composer.gotoScene( "first_story_line" ,options )
+                -- do not miss the below line to avoid the event propagation
+                return true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             elseif (switch.text == "Prompt 5b Option 2: Walk towards the noise. It could be another victim in need.") then
                 option_text = "Card 9b"
@@ -674,8 +733,25 @@ elseif (switch.text == 'Prompt 7b Option 1: "Are you alright? Who are you?"') th
                displayNextCard()
 
             elseif (switch.text == ' Prompt 13b  Option 1: Scream at the top of your lungs. Maybe, just maybe someone will hear your cries for help.') then
-                option_text = "Card 17b"
-               displayNextCard()
+               endingDeterminerText = switch.text
+               --myData = tostring(endingDeterminerText)
+              -- option_text = tostring(endingDeterminerText)
+               --displayNextCard()
+               --composer.gotoScene( "keypadscene" ,options )
+            
+            
+               myData =  tostring(endingDeterminerText)
+               local options ={
+            
+                  params ={type= myData}
+            
+               };
+               composer.gotoScene( "SceneEnd10" ,options )
+               -- do not miss the below line to avoid the event propagation
+               return true;
+
+
+
 
             elseif (switch.text == '  Prompt 13b  Option 2: Well. This is it... Might as well explore, and become familiar with this place.') then
                 option_text = "Card 19b"

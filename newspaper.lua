@@ -1,10 +1,6 @@
-
-local composer = require( "composer" )
+`   local composer = require( "composer" )
 local scene = composer.newScene()
-local TitleMusic = audio.loadSound("MusicAndScreens/Deathsong.wav")
-local widget = require('widget')
-local death1 = "Cerial's neighbors alerted him of a weird sound coming from his house... Possibly his dog they believe. Nevertheless Cerial has returned to finish the job with you..."
-local myData = "8a"
+ 
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -18,49 +14,7 @@ local myData = "8a"
 function scene:create( event )
  
    local sceneGroup = self.view
-
-   --local background = display.newImageRect("MusicAndScreens/DeathScene.png", display.contentWidth + 450, display.contentHeight + 500)
-   local TitleText = display.newText(death1, display.contentCenterX, display.contentCenterY, native.systemFont, 50)
-   TitleText:setFillColor(1.0, 0.0, 0.0)
-   --sceneGroup:insert(background)
-   sceneGroup:insert(TitleText)
-
-   --[[function play_background_music()   
-
-     audio.play(TitleMusic,{
-         channel =1,        
-         loops = -1,    
-
-       });  
-
-  end
-
-Runtime:addEventListener("enterFrame", play_background_music);--]]
-
-local function TryAgainFunction (event)
-
-   myData = "Card 8a"
-   local options ={
-
-      params ={type= myData}
-
-   };
-   composer.gotoScene( "first_story_line" ,options )
-   -- do not miss the below line to avoid the event propagation
-   return true;
-
-
-end --end of TryAgainFunction
-
-
-local TryAgain = display.newText("Try Again", display.contentCenterX+20, display.contentCenterY+20, native.systemFont, 20)
-TryAgain:setFillColor(1.0, 0.0, 0.0)
-sceneGroup:insert(TryAgain)
-TryAgain: addEventListener( "tap", TryAgainFunction)
-
-
-
-
+ 
    -- Initialize the scene here.
    -- Example: add display objects to "sceneGroup", add touch listeners, etc.
 end

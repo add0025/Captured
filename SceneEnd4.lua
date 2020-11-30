@@ -3,7 +3,8 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local TitleMusic = audio.loadSound("MusicAndScreens/Deathsong.wav")
 local widget = require('widget')
-
+local death1 = "Cerial has returned after neighbors alerted him about the strange noises coming from his house!"
+local myData = "3a"
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -18,17 +19,13 @@ function scene:create( event )
  
    local sceneGroup = self.view
 
-   local background = display.newImageRect("MusicAndScreens/DeathScene.png", display.contentWidth + 450, display.contentHeight + 500)
-   local TitleText = display.newText('You were killed', display.contentCenterX, display.contentCenterY, native.systemFont, 50)
-
-
-
+   --local background = display.newImageRect("MusicAndScreens/DeathScene.png", display.contentWidth + 450, display.contentHeight + 500)
+   local TitleText = display.newText(death1, display.contentCenterX, display.contentCenterY, native.systemFont, 50)
    TitleText:setFillColor(1.0, 0.0, 0.0)
-
-   sceneGroup:insert(background)
+   --sceneGroup:insert(background)
    sceneGroup:insert(TitleText)
 
-   function play_background_music()   
+   --[[function play_background_music()   
 
      audio.play(TitleMusic,{
          channel =1,        
@@ -38,7 +35,30 @@ function scene:create( event )
 
   end
 
-Runtime:addEventListener("enterFrame", play_background_music);
+Runtime:addEventListener("enterFrame", play_background_music);--]]
+
+local function TryAgainFunction (event)
+
+   myData = "Card 3a"
+   local options ={
+
+      params ={type= myData}
+
+   };
+   composer.gotoScene( "first_story_line" ,options )
+   -- do not miss the below line to avoid the event propagation
+   return true;
+
+
+end --end of TryAgainFunction
+
+
+local TryAgain = display.newText("Try Again", display.contentCenterX+20, display.contentCenterY+20, native.systemFont, 20)
+TryAgain:setFillColor(1.0, 0.0, 0.0)
+sceneGroup:insert(TryAgain)
+TryAgain: addEventListener( "tap", TryAgainFunction)
+
+
 
 
    -- Initialize the scene here.

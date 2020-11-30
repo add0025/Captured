@@ -16,6 +16,8 @@ local prompt_counter = 1
  local myData =  "Card 1a"
  local widget = require( "widget" )
  local endingDeterminerText = ' ';
+ local options2 
+ local newspaperIcon
 -- local keyboard = require("onScreenKeyboard")
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
@@ -27,6 +29,36 @@ local prompt_counter = 1
 ---------------------------------------------------------------------------------
  
 -- "scene:create()"
+
+
+local function pause()
+
+   options2 = {
+      effect = "fade",
+      time = 1000
+   }
+   composer.gotoScene("pause", options)
+
+end
+
+
+local function handleButtonEvent1( event )
+
+    if ( "ended" == event.phase ) then
+        print( "Button was pressed and released" )
+        composer.showOverlay( "pause", options )
+    end
+end
+-- By some method (a pause button, for example), show the overlay
+-- Create the widget
+
+
+
+
+
+
+
+
 function scene:create( event )
  
    local sceneGroup = self.view
@@ -48,7 +80,7 @@ function scene:create( event )
    sceneGroup:insert(myImage)
 
 
-
+  
    
 
 local function handleButtonEvent ( event )
@@ -123,48 +155,12 @@ end --end of handleButtonEvent
 radioGroup:insert( button3 )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
    sceneGroup:insert(button1)
    sceneGroup:insert(button2)
    sceneGroup:insert(button3)
 
 
    
-  --[[] 
-   widgetGroup:insert(radioButton1)
-   
-   local radioButton2 = widget.newSwitch(
-       {left = 100,
-       top = 340,
-       style = "radio",
-       id = "Mileage",
-       width = 20,
-       height = 20,
-       onPress= onSwitchPress
-   }
-   )
-   radioGroup:insert( radioButton2 )--]]
-
 
 
 
@@ -256,10 +252,34 @@ end--end of function
          option_text = "Card 3a"
         displayNextCard()
 
+
+
+
+
       elseif (switch.text == "Prompt 3a Option 1: Cry, you are done for!") then
-         print("hello")
-         option_text = "Card 3a"
-         displayNextCard()
+      
+
+
+         endingDeterminerText = switch.text
+            --myData = tostring(endingDeterminerText)
+           -- option_text = tostring(endingDeterminerText)
+            --displayNextCard()
+            --composer.gotoScene( "keypadscene" ,options )
+
+
+            myData =  tostring(endingDeterminerText)
+            local options ={
+   
+               params ={type= myData}
+      
+            };
+            composer.gotoScene( "SceneEnd4" ,options )
+            -- do not miss the below line to avoid the event propagation
+            return true;
+
+
+
+
          
       elseif (switch.text == "Prompt 1a Option 2: Demand your release. Who does this guy think he is?") then
          print("hello")
@@ -267,20 +287,44 @@ end--end of function
          displayNextCard()
 
       elseif (switch.text == "Prompt 2 Option 2: Quick! theres a door to the left of the room, while he's turned around run and find the nearest exit!") then
-        -- print("hello")
-         option_text = "Card 2a"
-         displayNextCard()
+         endingDeterminerText = switch.text
+         --myData = tostring(endingDeterminerText)
+        -- option_text = tostring(endingDeterminerText)
+         --displayNextCard()
+         --composer.gotoScene( "keypadscene" ,options )
+      
+      
+         myData =  tostring(endingDeterminerText)
+         local options ={
+      
+            params ={type= myData}
+      
+         };
+         composer.gotoScene( "SceneEnd8" ,options )
+         -- do not miss the below line to avoid the event propagation
+         return true;
 
 
 
-      elseif (switch.text == "Prompt 6a Option 2: Cerials bedroom apears to be next door. Maybe if you go inside you'll find some clues on who this man really is.") then
-         -- print("hello")
-          option_text = "Card 10a"
-          displayNextCard()
+elseif (switch.text == "Prompt 6a Option 2: Cerials bedroom apears to be next door. Maybe if you go inside you'll find some clues on who this man really is.") then
+        
+        
+        
+newspaperIcon = display.newImageRect( "prompt2.png", 20, 20)
+newspaperIcon.x =display.contentCenterX + 100
+newspaperIcon.y =display.contentCenterY + 50
+newspaperIcon:addEventListener("touch", pause)
+sceneGroup:insert(newspaperIcon)
+option_text = "Card 10a"
+displayNextCard()
 
 
 
-         elseif (switch.text == "Prompt 6a Option 3: Too good to be true! No way that is a way out, search some more.") then
+
+
+
+
+elseif (switch.text == "Prompt 6a Option 3: Too good to be true! No way that is a way out, search some more.") then
             -- print("hello")
              option_text = "Card 9a"
              displayNextCard()
@@ -291,9 +335,24 @@ end--end of function
 
 
 elseif (switch.text == "Prompt 7a2  Option 1: Scream at the top of your lungs. Maybe, just maybe someone will hear your cries for help.") then
-         -- print("hello")
-          option_text = "Card 9a"
-          displayNextCard()
+   endingDeterminerText = switch.text
+   --myData = tostring(endingDeterminerText)
+  -- option_text = tostring(endingDeterminerText)
+   --displayNextCard()
+   --composer.gotoScene( "keypadscene" ,options )
+
+
+   myData =  tostring(endingDeterminerText)
+   local options ={
+
+      params ={type= myData}
+
+   };
+   composer.gotoScene( "SceneEnd7" ,options )
+   -- do not miss the below line to avoid the event propagation
+   return true;
+
+
 
 
 
@@ -618,16 +677,54 @@ print("function 6")
             displayNextCard()
          
          elseif (switch.text == " Prompt 7a  Option 1: Scream at the top of your lungs. Maybe, just maybe someone will hear your cries for help.") then
-            option_text = "Card 8a"
-           displayNextCard()
+            endingDeterminerText = switch.text
+            --myData = tostring(endingDeterminerText)
+           -- option_text = tostring(endingDeterminerText)
+            --displayNextCard()
+            --composer.gotoScene( "keypadscene" ,options )
+
+
+            myData =  tostring(endingDeterminerText)
+            local options ={
+   
+               params ={type= myData}
+      
+            };
+            composer.gotoScene( "SceneEnd6" ,options )
+            -- do not miss the below line to avoid the event propagation
+            return true;
+
+
+
+
+
+
    
          elseif (switch.text == "  Prompt 7a Option 2: Well. This is it... Might as well explore, and become familiar with this place...") then
             option_text = "Card 12a"
             displayNextCard()
 
          elseif (switch.text == "Prompt 4a Option 1: Stay put, you don' know when Cerial will return .") then
-            option_text = "Card 4a"
-            displayNextCard()
+            endingDeterminerText = switch.text
+            --myData = tostring(endingDeterminerText)
+           -- option_text = tostring(endingDeterminerText)
+            --displayNextCard()
+            --composer.gotoScene( "keypadscene" ,options )
+
+
+            myData =  tostring(endingDeterminerText)
+            local options ={
+   
+               params ={type= myData}
+      
+            };
+            composer.gotoScene( "SceneEnd5" ,options )
+            -- do not miss the below line to avoid the event propagation
+            return true;
+
+
+
+
 
          elseif (switch.text == "Prompt 4a2 Option 1: Stay put, you don' know when Cerial will return .") then
             option_text = "Card 5a"
@@ -640,14 +737,27 @@ print("function 6")
 
 
          elseif (switch.text == "Prompt 8a  Option 1: Read it! (If the user chooses not to the item will be placed in their inventory)") then
+
+
+
+
+            
+
+
+
+
+
             option_text = "Card 11a"
             displayNextCard()
 
          elseif (switch.text == "Prompt 8a  Option 2: Continue exploring. See if you can find any other clues.") then
+
+            newspaperIcon.isVisible =false
             option_text = "Card 9a"
             displayNextCard()
 
          elseif (switch.text == " Prompt 8a  Option 3: Well now that the bed room's checked, time to see what that door is about.") then
+            newspaperIcon.isVisible =false
             option_text = "Card 8a"
             displayNextCard()
 

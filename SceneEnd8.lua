@@ -3,8 +3,8 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local TitleMusic = audio.loadSound("MusicAndScreens/Deathsong.wav")
 local widget = require('widget')
-local death1 = "Cerial's neighbors alerted him of a weird sound coming from his house... Possibly his dog they believe. Nevertheless Cerial has returned to finish the job with you..."
-local myData = "8a"
+local death1 = "Cerial Quickly grabs you and ends you right then and there. Maybe it would be a good idea to wait for him to leave before anymore plans of action..."
+local myData = "2a"
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -39,7 +39,7 @@ Runtime:addEventListener("enterFrame", play_background_music);--]]
 
 local function TryAgainFunction (event)
 
-   myData = "Card 8a"
+   myData = "Card 2a"
    local options ={
 
       params ={type= myData}
