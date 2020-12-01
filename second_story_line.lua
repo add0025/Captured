@@ -18,6 +18,7 @@ local special_eleven_prompt
 local option1_11
 local widget = require( "widget" )
 local endingDeterminerText = ' ';
+local newspaperIcon
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -26,7 +27,27 @@ local endingDeterminerText = ' ';
 -- local forward references should go here
  
 ---------------------------------------------------------------------------------
- 
+local function pause()
+
+   options2 = {
+      effect = "fade",
+      time = 1000
+   }
+   composer.gotoScene("pause2", options)
+
+end
+
+
+local function handleButtonEvent1( event )
+
+    if ( "ended" == event.phase ) then
+        print( "Button was pressed and released" )
+        composer.showOverlay( "pause2", options )
+    end
+end
+-- By some method (a pause button, for example), show the overlay
+-- Create the widget
+
 -- "scene:create()"
 function scene:create( event )
  
@@ -729,7 +750,15 @@ elseif (switch.text == 'Prompt 7b Option 1: "Are you alright? Who are you?"') th
                displayNextCard()
 
             elseif (switch.text == 'Prompt 12b Option 2:  Cerials bedroom apears to be next door. Maybe if you both go inside you will find some clues on who this man really is.') then
-                option_text = "Card 18b"
+                
+               newspaperIcon = display.newImageRect( "prompt2.png", 20, 20)
+               newspaperIcon.x =display.contentCenterX + 100
+               newspaperIcon.y =display.contentCenterY + 50
+               newspaperIcon:addEventListener("touch", pause)
+               sceneGroup:insert(newspaperIcon)
+                              
+               
+               option_text = "Card 18b"
                displayNextCard()
 
             elseif (switch.text == ' Prompt 13b  Option 1: Scream at the top of your lungs. Maybe, just maybe someone will hear your cries for help.') then
@@ -800,11 +829,16 @@ elseif (switch.text == 'Prompt 7b Option 1: "Are you alright? Who are you?"') th
 
 
             elseif (switch.text == 'Prompt 14b Option 1: Read it! (If the user chooses not to the item will be placed in their inventory). Interesting. Now time to get out of here') then
-                option_text = "Card 17b"
+                
+               newspaperIcon.isVisible = false
+               option_text = "Card 17b"
                displayNextCard()
 
             elseif (switch.text == 'Prompt 14b  Option 2: Well now that the bed rooms checked, time to see what that door is about.') then
                 option_text = "Card 17b"
+                newspaperIcon.isVisible = false
+
+
                displayNextCard()
 
 
