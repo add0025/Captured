@@ -3,7 +3,7 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local TitleMusic = audio.loadSound("MusicAndScreens/Deathsong.wav")
 local widget = require('widget')
-local kimberlyCapturedLose = "Unfortunately, Cerial got the best of you and Kimberly and on July 20th 1972 both you and Kimberly perished in Cerial's basement. Your families continue to search for you, and to this day have no idea what happened to yourself and Kimberly..."
+
 ---------------------------------------------------------------------------------
 -- All code outside of the listener functions will only be executed ONCE
 -- unless "composer.removeScene()" is called.
@@ -18,17 +18,17 @@ function scene:create( event )
  
    local sceneGroup = self.view
 
-   --local background = display.newImageRect("MusicAndScreens/DeathScene.png", display.contentWidth + 450, display.contentHeight + 500)
-   local TitleText = display.newText(kimberlyCapturedLose, display.contentCenterX, display.contentCenterY, native.systemFont, 50)
+   local background = display.newImageRect("MusicAndScreens/DeathScene.png", display.contentWidth + 450, display.contentHeight + 500)
+   local TitleText = display.newText('You were killed', display.contentCenterX, display.contentCenterY, native.systemFont, 50)
 
 
 
    TitleText:setFillColor(1.0, 0.0, 0.0)
 
-   --sceneGroup:insert(background)
+   sceneGroup:insert(background)
    sceneGroup:insert(TitleText)
 
-   --[[function play_background_music()   
+   function play_background_music()   
 
      audio.play(TitleMusic,{
          channel =1,        
@@ -38,7 +38,7 @@ function scene:create( event )
 
   end
 
-Runtime:addEventListener("enterFrame", play_background_music);--]]
+Runtime:addEventListener("enterFrame", play_background_music);
 
 
    -- Initialize the scene here.
