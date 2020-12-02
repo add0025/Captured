@@ -50,6 +50,9 @@ function scene:create( event )
 
    inventory:addItem("knife")
 
+   inventory:setFlag("5b2")
+   inventory:flagSave()
+
    local background = display.newImageRect( "captured_1.png", display.contentWidth+100, display.contentHeight+200 )
    background.y=-100
    background.x =-100

@@ -50,6 +50,9 @@ function scene:create( event )
 
    inventory:addItem("basementKey")
 
+   inventory:setFlag("4b3")
+   inventory:flagSave()
+
    local background = display.newImageRect( "captured_1.png", display.contentWidth+100, display.contentHeight+200 )
    background.y=-100
    background.x =-100

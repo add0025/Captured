@@ -7,7 +7,7 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "'I'm not sure. I've been trying to figure that out for days, or months maybe... Gosh how long have I been here...Anyways one thing I Do know for sure is he is obssesed with this pattern 7-A-2-0...I have no idea what it means.. but i hear him repating it constantly...'"
+local promptText = "'I'm not sure. I've been trying to figure that out for days, or months maybe... Gosh how long have I been here...Anyways one thing I Do know for sure is he is obssesed with this pattern 6135831...I have no idea what it means.. but i hear him repating it constantly...'"
 local choiceText1 = "Hm. That sounds like she has been here for a while. Maybe if you ask more questions you can crack the code on who she really is...and that pattern. It's probably a good thing to keep in mind."
 local choiceText2 = "Enough talking. Time for you and Kimberly to make your escape."
 --local choiceText3 = "Choice Text 3"
@@ -47,6 +47,9 @@ function scene:create( event )
    local sceneGroup = self.view
 
    inventory = event.params.inv
+
+   inventory:setFlag("10b")
+   inventory:flagSave()
 
    inventory:addItem("seenWall")
 

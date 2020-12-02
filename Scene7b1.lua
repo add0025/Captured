@@ -48,6 +48,9 @@ function scene:create( event )
 
    inventory = event.params.inv
 
+   inventory:setFlag("7b1")
+   inventory:flagSave()
+
    local background = display.newImageRect( "captured_1.png", display.contentWidth+100, display.contentHeight+200 )
    background.y=-100
    background.x =-100

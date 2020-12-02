@@ -49,6 +49,11 @@ function scene:create( event )
  
    local sceneGroup = self.view
 
+   inventory = event.params.inv
+
+   inventory:setFlag("Win3")
+   inventory:flagSave()
+
    local background = display.newImageRect( "WinScene.png", display.contentWidth+100, display.contentHeight+200 )
    background.y=-100
    background.x =-100

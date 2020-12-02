@@ -7,7 +7,7 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "Walking around, you notice markings on the wall.. 7-A-2-0... Hm, something to remember I suppose... What could it mean? Time to go check out that door.... You unlock the door and to your surprise you have mistakenly identified the muffled sound of the outdoors, for the ominous music of Cerials basement below! NO. You go to open the door back up, but you are locked from the inside..."
+local promptText = "Walking around, you notice markings on the wall.. 6135831... Hm, something to remember I suppose... What could it mean? Time to go check out that door.... You unlock the door and to your surprise you have mistakenly identified the muffled sound of the outdoors, for the ominous music of Cerials basement below! NO. You go to open the door back up, but you are locked from the inside..."
 local choiceText1 = "Scream at the top of your lungs. Maybe, just maybe someone will hear your cries for help."
 local choiceText2 = "Well. This is it... Might as well explore, and become familiar with this place..."
 local choiceText3 = ""
@@ -47,6 +47,9 @@ function scene:create( event )
    local sceneGroup = self.view
 
    inventory = event.params.inv 
+
+   inventory:setFlag("7a2")
+   inventory:flagSave()
 
    inventory:addItem("seenWall")
 

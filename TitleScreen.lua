@@ -7,7 +7,8 @@ inventory:flagInit()
 local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 local percent = 0
-local progress = "Completion:  ".. math.floor(percent) .. "%"
+local progress = "Completion:  0%"
+local progressDisplay = display.newText(progress, display.contentWidth - 20, 200, 200, 0,12,"right") -- gets declared here so we can edit it every time we return to the title screen
 
 -- Text values declared here just to make them easy to access
 local promptText = "                  Captured"
@@ -54,6 +55,8 @@ end
 function scene:create( event )
  
    local sceneGroup = self.view
+
+   sceneGroup:insert(progressDisplay)
 
    local background = display.newImageRect( "TitleScreen.png", display.contentWidth+100, display.contentHeight+200 )
    background.y=-100
@@ -126,7 +129,7 @@ function scene:show( event )
 
       end
 
-      local progressDisplay = display.newText(progress, display.contentWidth - 20, 200, 200, 0,12,"right") -- gets declared here so we can edit it every time we return to the title screen
+      progressDisplay.text = progress
       progressDisplay:setFillColor(0,0,0)
       sceneGroup:insert(progressDisplay)
 
