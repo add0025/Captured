@@ -3,6 +3,8 @@ local scene = composer.newScene()
 local correct_password ="6135831"
 local clicked_password=""
 local widget = require( "widget" )
+local inventory = {}
+local takenHostage = false
 local button_sound = audio.loadSound("button-28.wav");
 
 local choose = " "
@@ -17,14 +19,12 @@ local choose = " "
 ---------------------------------------------------------------------------------
  
 -- "scene:create()"
-function scene:create( event )
+function scene:create( event ) 
  
    local sceneGroup = self.view
 
-   
-
-
-
+   inventory = event.params.inv
+   takenHostage = event.params.hostage
 
    local background = display.newImageRect( "pad_lock.png", display.contentWidth+450, display.contentHeight+350 )
    background.y=-150
@@ -331,18 +331,6 @@ local switch = event.target
        sceneGroup:insert(button0)
        --sceneGroup:insert(enterButton)
 
-
-
-
-
-
-
-
-
-
-
-
- 
    -- Initialize the scene here.
    -- Example: add display objects to "sceneGroup", add touch listeners, etc.
 end
@@ -358,8 +346,8 @@ function scene:show( event )
       if (event.params == nil) then
          print("Keypadscene: params are nil.")
       else
-      choose = event.params.type
-      print("Choose Text" .. choose)
+     -- choose = event.params.type
+      --print("Choose Text" .. choose)
 
       end--end of if statement
 
@@ -367,63 +355,35 @@ function scene:show( event )
 
       local function codeSubmitted (event)
 
-         print("made it here")
+         print("[debug] code submitted (B)")
 
          ---KIMBERLY AND YOU STORYLINE (KIMBERLY NOT TAKEN BY CERIAL)
          
          if (tostring(clicked_password) == tostring(correct_password)) then
 
-         if (tostring(choose) == "Prompt 15b  Option 3: The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it will open the door and we will be out of here!  (will be locked if Kimerly never gave the pattern to user)") then
-         composer.gotoScene("SceneWin1")
-         end --end of inner if
+            if (takenHostage) then
+
+               local options = { params = { inv = inventory } }
+               composer.gotoScene("SceneWin2", options)
+
+            else
+
+               local options = { params = { inv = inventory } }
+               composer.gotoScene("SceneWin1", options)
+
+            end 
          
-      end
-         
+         end
          
          if (tostring(clicked_password) ~= tostring(correct_password)) then
 
-            if (tostring(choose) == "Prompt 15b  Option 3: The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it will open the door and we will be out of here!  (will be locked if Kimerly never gave the pattern to user)") then
-               composer.gotoScene("SceneEnd1")
-               end --end of inner if
-         
+            local options = { params = { inv = inventory } }
+            composer.gotoScene("SceneEnd1", options)
          
          end-- end of if/elseif statement
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-         
          end -- end of codeSubmitted function
-         
-         
-         
-         
-         
-         
-         
+
             local enterButton =display.newText("OK", 350, 425, 300, 0,"SpecialElite.ttf",20)
             enterButton:setFillColor( 0.1, 0.1, 0.1)
             sceneGroup:insert(enterButton)
@@ -431,13 +391,6 @@ function scene:show( event )
          --event listner for the enter button below
          
          enterButton: addEventListener( "tap", codeSubmitted)
-         
-
-
-
-
-
-
 
       -- Called when the scene is still off screen (but is about to come on screen).
    elseif ( phase == "did" ) then

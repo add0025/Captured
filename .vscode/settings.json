@@ -1,0 +1,16 @@
+{
+    "Lua.completion.enable": false,
+    "Lua.color.mode": "Grammar",
+    "Lua.diagnostics.globals": [
+        "audio",
+        "display",
+        "handleButtonEvent",
+        "system",
+        "module",
+        "onScreenKeyboard"
+    ],
+    "Lua.diagnostics.disable": [
+        "undefined-global",
+        "unused-function"
+    ]
+}

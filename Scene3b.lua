@@ -7,17 +7,17 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "Prompt Text"
-local choiceText1 = "Choice Text 1"
-local choiceText2 = "Choice Text 2"
-local choiceText3 = "Choice Text 3"
+local promptText = "'I am leaving. Don't do anything stupid or it will be the last thing you do...'  The serial killer has left the house for a brief moment! You hear voices in the distance that appear to be coming from outside. They do not sound like Cerials voice. Perhaps they are joggers."
+local choiceText1 = "Search for a key to unlock the room you have been placed in."
+local choiceText2 = "Scream at the top of your lungs in hopes that they hear you."
+local choiceText3 = "Stay put, you do not know when Cerial will be coming back. You will have a better chance of escaping when he goes to bed."
 
 -- Function for button 1
 local function optionSelect1(event) 
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene4b", options)
    --print("Selected Option 1")
 
 end
@@ -27,7 +27,7 @@ local function optionSelect2(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene4a1", options)
    --print("Selected Option 2")
 
 end
@@ -37,7 +37,7 @@ local function optionSelect3(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene4a2", options)
    --print("Selected Option 3")
 
 end

@@ -7,17 +7,17 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "Prompt Text"
-local choiceText1 = "Choice Text 1"
-local choiceText2 = "Choice Text 2"
-local choiceText3 = "Choice Text 3"
+local promptText = "Interesting... He keeps his room clean for such a very odd man...Hey! There appears to be a clipping out of the newpaper by the side of his bed."
+local choiceText1 = "Read the newspaper."
+local choiceText2 = "Now that the bedroom is checked, time to see what that door is about. (Requires key)"
+local choiceText3 = "Try to bust down the locked door."
 
 -- Function for button 1
 local function optionSelect1(event) 
   
    audio.play(ping)
-   local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   local options = { params = { inv = inventory, fromB = true } }
+   composer.gotoScene("Scene14bAlt", options)
    --print("Selected Option 1")
 
 end
@@ -27,7 +27,7 @@ local function optionSelect2(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene13b", options)
    --print("Selected Option 2")
 
 end
@@ -37,7 +37,7 @@ local function optionSelect3(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("SceneEnd1", options)
    --print("Selected Option 3")
 
 end
@@ -73,7 +73,7 @@ function scene:create( event )
    local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
       
    prompt:setFillColor( 1, 1, 1 )
-   option1:setFillColor( 0, 0, 0 )
+   option1:setFillColor( 255, 0, 0 )
    option2:setFillColor( 0, 0, 0 )
    option3:setFillColor( 0, 0, 0 )
 
@@ -95,7 +95,10 @@ function scene:create( event )
 
    -- add conditions to the listeners to lock choices
    tButton1:addEventListener("touch", optionSelect1)
-   tButton2:addEventListener("touch", optionSelect2)
+   if (inventory:has("basementKey")) then
+      tButton2:addEventListener("touch", optionSelect2)
+      option2:setFillColor( 0, 0, 0 )
+   end
    tButton3:addEventListener("touch", optionSelect3)
 
    radioGroup:insert(button1)

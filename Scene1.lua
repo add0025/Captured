@@ -18,7 +18,7 @@ local function optionSelect1(event)
    audio.play(ping)
    local options = { params = { inv = inventory } }
    composer.gotoScene("Scene2a", options)
-   print("Selected Option 1")
+   --print("Selected Option 1")
 
 end
 
@@ -28,7 +28,7 @@ local function optionSelect2(event)
    audio.play(ping)
    local options = { params = { inv = inventory } }
    composer.gotoScene("Scene2a", options)
-   print("Selected Option 2")
+  --print("Selected Option 2")
 
 end
 
@@ -38,7 +38,7 @@ local function optionSelect3(event)
    audio.play(ping)
    local options = { params = { inv = inventory } }
    composer.gotoScene("Scene2b", options)
-   print("Selected Option 3")
+   --print("Selected Option 3")
 
 end
  

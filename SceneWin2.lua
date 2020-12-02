@@ -17,7 +17,7 @@ function scene:create( event )
  
    local sceneGroup = self.view
 
-   local background = display.newImageRect("MusicAndScreens/WinScene.png", display.contentWidth + 450, display.contentHeight + 500)
+   local background = display.newImageRect("WinScene.png", display.contentWidth + 450, display.contentHeight + 500)
    local TitleText = display.newText('You Win!!!', display.contentCenterX, display.contentCenterY, native.systemFont, 50)
 
 

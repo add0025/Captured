@@ -7,17 +7,17 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "Prompt Text"
-local choiceText1 = "Choice Text 1"
-local choiceText2 = "Choice Text 2"
-local choiceText3 = "Choice Text 3"
+local promptText = "You find the door and see that there is another girl tied up with rope and duct tape!"
+local choiceText1 = "Quick! Cut her free. (Requires sharp object)"
+local choiceText2 = "Oh, no! you have no way to set her free! Search the room to see if there is any way to set her free." -- suggest: remove this choice, locks this entire branch behind having the knife or razor
+local choiceText3 = "Leave. Once you find a way out you will be able to get help for her later."
 
 -- Function for button 1
 local function optionSelect1(event) 
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene7b1", options)
    --print("Selected Option 1")
 
 end
@@ -27,7 +27,7 @@ local function optionSelect2(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene7b2", options)
    --print("Selected Option 2")
 
 end
@@ -37,7 +37,7 @@ local function optionSelect3(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene6a", options)
    --print("Selected Option 3")
 
 end
@@ -73,7 +73,7 @@ function scene:create( event )
    local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
       
    prompt:setFillColor( 1, 1, 1 )
-   option1:setFillColor( 0, 0, 0 )
+   option1:setFillColor( 255, 0, 0 )
    option2:setFillColor( 0, 0, 0 )
    option3:setFillColor( 0, 0, 0 )
 
@@ -94,7 +94,10 @@ function scene:create( event )
    tButton3.alpha = 0.01
 
    -- add conditions to the listeners to lock choices
-   tButton1:addEventListener("touch", optionSelect1)
+   if (inventory:has("knife") or inventory:has("razor")) then
+      tButton1:addEventListener("touch", optionSelect1)
+      option1:setFillColor( 0, 0, 0 )
+   end
    tButton2:addEventListener("touch", optionSelect2)
    tButton3:addEventListener("touch", optionSelect3)
 

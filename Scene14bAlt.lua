@@ -7,17 +7,17 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "Prompt Text"
-local choiceText1 = "Choice Text 1"
-local choiceText2 = "Choice Text 2"
-local choiceText3 = "Choice Text 3"
+local promptText = "It's a newspaper article about the ninth victim of a serial killer. Interesting... now to time to get out of here."
+--local choiceText1 = "Read the newspaper."
+local choiceText2 = "Now that the bedroom is checked, time to see what that door is about. (Requires key)"
+local choiceText3 = "Try to bust down the locked door."
 
 -- Function for button 1
 local function optionSelect1(event) 
   
-   audio.play(ping)
-   local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   --audio.play(ping)
+   --local options = { params = { inv = inventory, fromB = true } }
+   --composer.gotoScene("Scene14bAlt", options)
    --print("Selected Option 1")
 
 end
@@ -27,7 +27,7 @@ local function optionSelect2(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene13b", options)
    --print("Selected Option 2")
 
 end
@@ -37,7 +37,7 @@ local function optionSelect3(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("SceneEnd1", options)
    --print("Selected Option 3")
 
 end
@@ -68,12 +68,12 @@ function scene:create( event )
 
    -- text
    local prompt  = display.newText(promptText, display.contentCenterX, 20, 300, 0,"edo.ttf",15)
-   local option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
+   --local option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
    local option2 = display.newText(choiceText2, display.contentCenterX, 345, 200, 0, "edo.ttf",12)
    local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
       
    prompt:setFillColor( 1, 1, 1 )
-   option1:setFillColor( 0, 0, 0 )
+   --option1:setFillColor( 255, 0, 0 )
    option2:setFillColor( 0, 0, 0 )
    option3:setFillColor( 0, 0, 0 )
 
@@ -82,32 +82,35 @@ function scene:create( event )
 
    local button1 = widget.newButton( { left = -75, top = 210, id = "button_1", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
    local button2 = widget.newButton( { left = -75, top = 120, id = "button_2", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
-   local button3 = widget.newButton( { left = -75, top = 30, id = "button_3", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
+   --local button3 = widget.newButton( { left = -75, top = 30, id = "button_3", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
    
-   local tButton1 = display.newRect(display.contentCenterX, 265, 480, 90)
+   --local tButton1 = display.newRect(display.contentCenterX, 265, 480, 90)
    local tButton2 = display.newRect(display.contentCenterX, 355, 480, 90)
    local tButton3 = display.newRect(display.contentCenterX, 445, 480, 90)
 
    -- detection boxes can't just be invisible for some reason
-   tButton1.alpha = 0.01
+   --tButton1.alpha = 0.01
    tButton2.alpha = 0.01
    tButton3.alpha = 0.01
 
    -- add conditions to the listeners to lock choices
-   tButton1:addEventListener("touch", optionSelect1)
-   tButton2:addEventListener("touch", optionSelect2)
+   --tButton1:addEventListener("touch", optionSelect1)
+   if (inventory:has("basementKey")) then
+      tButton2:addEventListener("touch", optionSelect2)
+      option2:setFillColor( 0, 0, 0 )
+   end
    tButton3:addEventListener("touch", optionSelect3)
 
    radioGroup:insert(button1)
    radioGroup:insert(button2)
-   radioGroup:insert(button3)
+   --radioGroup:insert(button3)
 
    sceneGroup:insert(radioGroup)
    sceneGroup:insert(prompt)
-   sceneGroup:insert(option1)
+   --sceneGroup:insert(option1)
    sceneGroup:insert(option2)
    sceneGroup:insert(option3)
-   sceneGroup:insert(tButton1)
+   --sceneGroup:insert(tButton1)
    sceneGroup:insert(tButton2)
    sceneGroup:insert(tButton3)
 

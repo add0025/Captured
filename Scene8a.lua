@@ -7,17 +7,17 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "Prompt Text"
-local choiceText1 = "Choice Text 1"
-local choiceText2 = "Choice Text 2"
-local choiceText3 = "Choice Text 3"
+local promptText = "Intersting... He keeps his room clean for such a very odd man...Hey!, there appears to be a clipping out of the newpaper by the side of his bed."
+local choiceText1 = "Read it!"
+local choiceText2 = "Continue exploring. See if you can find any other clues."
+local choiceText3 = "Well now that the bed room's checked, time to see what that door is about. (Requires key)"
 
 -- Function for button 1
 local function optionSelect1(event) 
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene10a", options)
    --print("Selected Option 1")
 
 end
@@ -27,7 +27,7 @@ local function optionSelect2(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene7a2", options)
    --print("Selected Option 2")
 
 end
@@ -37,7 +37,7 @@ local function optionSelect3(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene7a1", options)
    --print("Selected Option 3")
 
 end
@@ -75,7 +75,7 @@ function scene:create( event )
    prompt:setFillColor( 1, 1, 1 )
    option1:setFillColor( 0, 0, 0 )
    option2:setFillColor( 0, 0, 0 )
-   option3:setFillColor( 0, 0, 0 )
+   option3:setFillColor( 255, 0, 0 )
 
    -- buttons
    local radioGroup= display.newGroup()
@@ -96,7 +96,10 @@ function scene:create( event )
    -- add conditions to the listeners to lock choices
    tButton1:addEventListener("touch", optionSelect1)
    tButton2:addEventListener("touch", optionSelect2)
-   tButton3:addEventListener("touch", optionSelect3)
+   if (inventory:has("basementKey")) then
+      tButton3:addEventListener("touch", optionSelect3)
+      option3:setFillColor( 0, 0, 0 )
+   end
 
    radioGroup:insert(button1)
    radioGroup:insert(button2)

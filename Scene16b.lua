@@ -7,17 +7,19 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "Prompt Text"
-local choiceText1 = "Choice Text 1"
-local choiceText2 = "Choice Text 2"
-local choiceText3 = "Choice Text 3"
+local promptText = "Cerial has grabbed Kimberly before you can do any damage and is using her as a human shield! She yells 'Just go! leave me for dead save yourself...' You...."
+local choiceText1 = "Try and wrestle Kimberly from his grip."
+local choiceText2 = "Run around past him and go back outside the basement to find another opening. There must be another door."
+if (inventory:has("seenWall")) then
+   local choiceText3 = "The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it'll open the door and I can go and get help!"
+else local choiceText3 = "" end -- hide this option completely if the player hasn't seen the wall, instead of locking it
 
 -- Function for button 1
 local function optionSelect1(event) 
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene16b", options)
    --print("Selected Option 1")
 
 end
@@ -27,7 +29,7 @@ local function optionSelect2(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("SceneEnd1", options)
    --print("Selected Option 2")
 
 end
@@ -36,8 +38,8 @@ end
 local function optionSelect3(event) 
   
    audio.play(ping)
-   local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   local options = { params = { inv = inventory, hostage = true } }
+   composer.gotoScene("keypadscene", options)
    --print("Selected Option 3")
 
 end
@@ -70,20 +72,24 @@ function scene:create( event )
    local prompt  = display.newText(promptText, display.contentCenterX, 20, 300, 0,"edo.ttf",15)
    local option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
    local option2 = display.newText(choiceText2, display.contentCenterX, 345, 200, 0, "edo.ttf",12)
-   local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
       
    prompt:setFillColor( 1, 1, 1 )
    option1:setFillColor( 0, 0, 0 )
    option2:setFillColor( 0, 0, 0 )
-   option3:setFillColor( 0, 0, 0 )
+   if (inventory:has("seenWall")) then
+      local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
+      option3:setFillColor( 0, 0, 0 )
+   end
 
    -- buttons
    local radioGroup= display.newGroup()
 
    local button1 = widget.newButton( { left = -75, top = 210, id = "button_1", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
    local button2 = widget.newButton( { left = -75, top = 120, id = "button_2", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
-   local button3 = widget.newButton( { left = -75, top = 30, id = "button_3", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
-   
+   if (inventory:has("seenWall")) then
+      local button3 = widget.newButton( { left = -75, top = 30, id = "button_3", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
+   end
+
    local tButton1 = display.newRect(display.contentCenterX, 265, 480, 90)
    local tButton2 = display.newRect(display.contentCenterX, 355, 480, 90)
    local tButton3 = display.newRect(display.contentCenterX, 445, 480, 90)
@@ -96,7 +102,9 @@ function scene:create( event )
    -- add conditions to the listeners to lock choices
    tButton1:addEventListener("touch", optionSelect1)
    tButton2:addEventListener("touch", optionSelect2)
-   tButton3:addEventListener("touch", optionSelect3)
+   if (inventory:has("seenWall")) then
+      tButton3:addEventListener("touch", optionSelect3)
+   end
 
    radioGroup:insert(button1)
    radioGroup:insert(button2)

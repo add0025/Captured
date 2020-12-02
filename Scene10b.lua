@@ -7,17 +7,17 @@ local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
 
 -- Text values declared here just to make them easy to access
-local promptText = "Prompt Text"
-local choiceText1 = "Choice Text 1"
-local choiceText2 = "Choice Text 2"
-local choiceText3 = "Choice Text 3"
+local promptText = "'I'm not sure. I've been trying to figure that out for days, or months maybe... Gosh how long have I been here...Anyways one thing I Do know for sure is he is obssesed with this pattern 7-A-2-0...I have no idea what it means.. but i hear him repating it constantly...'"
+local choiceText1 = "Hm. That sounds like she has been here for a while. Maybe if you ask more questions you can crack the code on who she really is...and that pattern. It's probably a good thing to keep in mind."
+local choiceText2 = "Enough talking. Time for you and Kimberly to make your escape."
+--local choiceText3 = "Choice Text 3"
 
 -- Function for button 1
 local function optionSelect1(event) 
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene11b", options)
    --print("Selected Option 1")
 
 end
@@ -27,7 +27,7 @@ local function optionSelect2(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   composer.gotoScene("Scene12b", options)
    --print("Selected Option 2")
 
 end
@@ -35,9 +35,9 @@ end
 -- Function for button 3
 local function optionSelect3(event) 
   
-   audio.play(ping)
-   local options = { params = { inv = inventory } }
-   composer.gotoScene("", options)
+   --audio.play(ping)
+   --local options = { params = { inv = inventory } }
+   --composer.gotoScene("", options)
    --print("Selected Option 3")
 
 end
@@ -47,6 +47,8 @@ function scene:create( event )
    local sceneGroup = self.view
 
    inventory = event.params.inv
+
+   inventory:addItem("seenWall")
 
    local background = display.newImageRect( "captured_1.png", display.contentWidth+100, display.contentHeight+200 )
    background.y=-100
@@ -70,35 +72,35 @@ function scene:create( event )
    local prompt  = display.newText(promptText, display.contentCenterX, 20, 300, 0,"edo.ttf",15)
    local option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
    local option2 = display.newText(choiceText2, display.contentCenterX, 345, 200, 0, "edo.ttf",12)
-   local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
+   --local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
       
    prompt:setFillColor( 1, 1, 1 )
    option1:setFillColor( 0, 0, 0 )
    option2:setFillColor( 0, 0, 0 )
-   option3:setFillColor( 0, 0, 0 )
+   --option3:setFillColor( 0, 0, 0 )
 
    -- buttons
    local radioGroup= display.newGroup()
 
-   local button1 = widget.newButton( { left = -75, top = 210, id = "button_1", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
+   --local button1 = widget.newButton( { left = -75, top = 210, id = "button_1", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
    local button2 = widget.newButton( { left = -75, top = 120, id = "button_2", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
    local button3 = widget.newButton( { left = -75, top = 30, id = "button_3", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
    
    local tButton1 = display.newRect(display.contentCenterX, 265, 480, 90)
    local tButton2 = display.newRect(display.contentCenterX, 355, 480, 90)
-   local tButton3 = display.newRect(display.contentCenterX, 445, 480, 90)
+   --local tButton3 = display.newRect(display.contentCenterX, 445, 480, 90)
 
    -- detection boxes can't just be invisible for some reason
    tButton1.alpha = 0.01
    tButton2.alpha = 0.01
-   tButton3.alpha = 0.01
+   --tButton3.alpha = 0.01
 
    -- add conditions to the listeners to lock choices
    tButton1:addEventListener("touch", optionSelect1)
    tButton2:addEventListener("touch", optionSelect2)
-   tButton3:addEventListener("touch", optionSelect3)
+   --tButton3:addEventListener("touch", optionSelect3)
 
-   radioGroup:insert(button1)
+   --radioGroup:insert(button1)
    radioGroup:insert(button2)
    radioGroup:insert(button3)
 
@@ -106,10 +108,10 @@ function scene:create( event )
    sceneGroup:insert(prompt)
    sceneGroup:insert(option1)
    sceneGroup:insert(option2)
-   sceneGroup:insert(option3)
+   --sceneGroup:insert(option3)
    sceneGroup:insert(tButton1)
    sceneGroup:insert(tButton2)
-   sceneGroup:insert(tButton3)
+   --sceneGroup:insert(tButton3)
 
 end
  
