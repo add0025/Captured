@@ -10,9 +10,9 @@ local ping = audio.loadSound("ping.wav")
 local promptText = "Cerial has grabbed Kimberly before you can do any damage and is using her as a human shield! She yells 'Just go! leave me for dead save yourself...' You...."
 local choiceText1 = "Try and wrestle Kimberly from his grip."
 local choiceText2 = "Run around past him and go back outside the basement to find another opening. There must be another door."
-if (inventory:has("seenWall")) then
+--if (inventory:has("seenWall")) then
    local choiceText3 = "The door the keypad. the pattern Kimberly mentioned. Maybe if I type it in it'll open the door and I can go and get help!"
-else local choiceText3 = "" end -- hide this option completely if the player hasn't seen the wall, instead of locking it
+--else local choiceText3 = "" end -- hide this option completely if the player hasn't seen the wall, instead of locking it
 
 -- Function for button 1
 local function optionSelect1(event) 
@@ -39,7 +39,7 @@ local function optionSelect3(event)
   
    audio.play(ping)
    local options = { params = { inv = inventory, hostage = true } }
-   composer.gotoScene("keypadscene", options)
+   composer.gotoScene("keypadsceneB", options)
    --print("Selected Option 3")
 
 end
@@ -76,19 +76,19 @@ function scene:create( event )
    prompt:setFillColor( 1, 1, 1 )
    option1:setFillColor( 0, 0, 0 )
    option2:setFillColor( 0, 0, 0 )
-   if (inventory:has("seenWall")) then
+   --if (inventory:has("seenWall")) then
       local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
-      option3:setFillColor( 0, 0, 0 )
-   end
+      option3:setFillColor( 255, 0, 0 )
+   --end
 
    -- buttons
    local radioGroup= display.newGroup()
 
    local button1 = widget.newButton( { left = -75, top = 210, id = "button_1", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
    local button2 = widget.newButton( { left = -75, top = 120, id = "button_2", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
-   if (inventory:has("seenWall")) then
+   --if (inventory:has("seenWall")) then
       local button3 = widget.newButton( { left = -75, top = 30, id = "button_3", width = 480, height = 480, defaultFile = "captured_5.png", overFile = "captured_5.png",  onEvent = handleButtonEvent} )
-   end
+   --end
 
    local tButton1 = display.newRect(display.contentCenterX, 265, 480, 90)
    local tButton2 = display.newRect(display.contentCenterX, 355, 480, 90)
@@ -104,6 +104,7 @@ function scene:create( event )
    tButton2:addEventListener("touch", optionSelect2)
    if (inventory:has("seenWall")) then
       tButton3:addEventListener("touch", optionSelect3)
+      option3:setFillColor( 0, 0, 0 )
    end
 
    radioGroup:insert(button1)

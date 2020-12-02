@@ -2,12 +2,15 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local InventoryObj = require("Inventory")
 local inventory = InventoryObj:new()
+inventory:flagInit()
 --local inventory = {}
 local widget = require( "widget" )
 local ping = audio.loadSound("ping.wav")
+local percent = 0
+local progress = "Completion:  ".. math.floor(percent) .. "%"
 
 -- Text values declared here just to make them easy to access
-local promptText = "Captured"
+local promptText = "                  Captured"
 local choiceText1 = "Start Game"
 local choiceText2 = "Quit Game"
 local choiceText3 = "Credits"
@@ -26,10 +29,12 @@ end
 -- Function for button 2
 local function optionSelect2(event) 
   
-   audio.play(ping)
-   local options = { params = { inv = inventory } }
-   --composer.gotoScene("", options)
-   print("Quitting Game")
+   if (event.phase == "ended") then 
+      audio.play(ping)
+      local options = { params = { inv = inventory } }
+      --composer.gotoScene("", options)
+      print("Quitting Game")
+   end
 
 end
 
@@ -41,6 +46,7 @@ local function optionSelect3(event)
       local options = { params = { inv = inventory } }
       --composer.gotoScene("", options)
       print("(credits)")
+      --inventory:flagInit()
    end
 
 end
@@ -57,7 +63,7 @@ function scene:create( event )
    sceneGroup:insert(background)
 
    -- text
-   local prompt  = display.newText(promptText, display.contentCenterX, 20, 300, 0,"edo.ttf",15)
+   local prompt  = display.newText(promptText, display.contentCenterX, 20, 300, 0,"edo.ttf",22)
    local option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
    local option2 = display.newText(choiceText2, display.contentCenterX, 345, 200, 0, "edo.ttf",12)
    local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
@@ -98,10 +104,38 @@ function scene:show( event )
  
    if ( phase == "will" ) then
 
+      local i = 0
+      local n = 0
+
+      for k,v in pairs(inventory.flags) do
+
+         n = n + 1
+
+         if (v == true) then
+            i = i + 1
+         end
+
+      end
+
+      percent = (i / n) * 100
+      progress = "Completion:  ".. math.floor(percent) .. "%"
+      
+      for k,v in pairs(sceneGroup) do
+
+         print (k,v)
+
+      end
+
+      local progressDisplay = display.newText(progress, display.contentWidth - 20, 200, 200, 0,12,"right") -- gets declared here so we can edit it every time we return to the title screen
+      progressDisplay:setFillColor(0,0,0)
+      sceneGroup:insert(progressDisplay)
+
+
    elseif ( phase == "did" ) then
 
+      audio.stop()
       local bgm = audio.loadStream("title.wav")
-      audio.play(bgm, {channel = 1, loops = -1})
+      audio.play(bgm, {loops = -1})
 
    end
 end

@@ -73,8 +73,8 @@ function scene:create( event )
    local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
       
    prompt:setFillColor( 1, 1, 1 )
-   option1:setFillColor( 255, 0, 0 )
-   option2:setFillColor( 0, 0, 0 )
+   option1:setFillColor( 0, 0, 0 )
+   option2:setFillColor( 255, 0, 0 )
    option3:setFillColor( 0, 0, 0 )
 
    -- buttons

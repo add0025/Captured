@@ -38,7 +38,7 @@ local function optionSelect3(event)
    --audio.play(ping)
   --local options = { params = { inv = inventory } }
    --composer.gotoScene("", options)
-   print("(Node 7a1 has no option 3)")
+   print("(Node 7a2 has no option 3)")
 
 end
  

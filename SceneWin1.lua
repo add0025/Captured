@@ -1,56 +1,112 @@
-
 local composer = require( "composer" )
 local scene = composer.newScene()
-local widget = require('widget')
-local kimberlyWin = "CONGRATULATIONS YOU HAVE BEAT THE GAME! YOU AND KIMBERLY NARROWLY ESCAPED THE GRASP OF CERIAL THE SERIAL KILLER. YOU BOTH RUN TO ESACPE OUT OF THE UNLOCKED DOOR. ON LOOKERS SAW YOU, TWO YOUNG PEOPLE RUNNING FOR YOUR LIFE. THE COPS WERE QUICKLY CALLED AND CERIAL WENT THROUGH A SWIFT AND BRUTAL TRIAL IN WHICH HE WAS SENTENCED TO DEATH FOR KILLING 24 WOMEN. KIMBERLY'S FAMILY,A WEATHLY ONE AT THAT THANKS YOU FOR RESCUING THEIR DAUGHTER THAT HAD BEEN MISSING FOR TEN YEARS,AND HAS AWARDED YOU WITH THE KEY TO THE CITY... MISSION ACCOMPLISHED."
+--local InventoryObj = require("Inventory")
+--local inventory = InventoryObj:new()
+local inventory = {}
+local widget = require( "widget" )
+local ping = audio.loadSound("ping.wav")
 
----------------------------------------------------------------------------------
--- All code outside of the listener functions will only be executed ONCE
--- unless "composer.removeScene()" is called.
----------------------------------------------------------------------------------
+-- Text values declared here just to make them easy to access
+local promptText = "CONGRATULATIONS YOU HAVE BEAT THE GAME! YOU AND KIMBERLY NARROWLY ESCAPED THE GRASP OF CERIAL THE SERIAL KILLER. YOU BOTH RUN TO ESACPE OUT OF THE UNLOCKED DOOR. ON LOOKERS SAW YOU, TWO YOUNG PEOPLE RUNNING FOR YOUR LIFE. THE COPS WERE QUICKLY CALLED AND CERIAL WENT THROUGH A SWIFT AND BRUTAL TRIAL IN WHICH HE WAS SENTENCED TO DEATH FOR KILLING 24 WOMEN. KIMBERLY'S FAMILY,A WEATHLY ONE AT THAT THANKS YOU FOR RESCUING THEIR DAUGHTER THAT HAD BEEN MISSING FOR TEN YEARS,AND HAS AWARDED YOU WITH THE KEY TO THE CITY... MISSION ACCOMPLISHED."
+local choiceText1 = "Return to Title Screen"
+--local choiceText2 = "Quit Game"
+--local choiceText3 = "Credits"
+
+-- Function for button 1
+local function optionSelect1(event) 
+  
+   audio.pause()
+   audio.play(ping)
+   local options = { effect = "fade", time = 1000, params = { inv = inventory } }
+   composer.gotoScene("TitleScreen", options)
+   print("Returning to Title Screen")
+
+end
+
+-- Function for button 2
+local function optionSelect2(event) 
+  
+   --audio.play(ping)
+   --local options = { params = { inv = inventory } }
+   --composer.gotoScene("", options)
+   --print("Quitting Game")
+
+end
+
+-- Function for button 3
+local function optionSelect3(event) 
+  
+   if (event.phase == "ended") then
+      --audio.play(ping)
+      --local options = { params = { inv = inventory } }
+      --composer.gotoScene("", options)
+      --print("(credits)")
+   end
+
+end
  
--- local forward references should go here
- 
----------------------------------------------------------------------------------
- 
--- "scene:create()"
 function scene:create( event )
  
    local sceneGroup = self.view
 
-   --local background = display.newImageRect("MusicAndScreens/WinScene.png", display.contentWidth + 450, display.contentHeight + 500)
-   local TitleText = display.newText(kimberlyWin, display.contentCenterX, display.contentCenterY, native.systemFont, 50)
+   local background = display.newImageRect( "WinScene.png", display.contentWidth+100, display.contentHeight+200 )
+   background.y=-100
+   background.x =-100
+   background.anchorX= 0
+   background.anchorY= 0
+   sceneGroup:insert(background)
 
+   -- text
+   local prompt  = display.newText(promptText, display.contentCenterX, 75, 300, 0,"edo.ttf",15)
+   local option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
+   --local option2 = display.newText(choiceText2, display.contentCenterX, 345, 200, 0, "edo.ttf",12)
+   --local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
+      
+   prompt:setFillColor( 0, 0, 0 )
+   option1:setFillColor( 0, 0, 0 )
+   --option2:setFillColor( 0, 0, 0 )
+   --option3:setFillColor( 0, 0, 0 )
 
+   -- buttons
+   local tButton1 = display.newRect(display.contentCenterX, 265, 480, 90)
+   --local tButton2 = display.newRect(display.contentCenterX, 355, 480, 90)
+   --local tButton3 = display.newRect(display.contentCenterX, 445, 480, 90)
 
-   TitleText:setFillColor(1.0, 0.0, 0.0)
+   tButton1.alpha = 0.2
+   --tButton2.alpha = 0.25
+   --tButton3.alpha = 0.2
 
-   --sceneGroup:insert(background)
-   sceneGroup:insert(TitleText)
+   -- add conditions to the listeners to lock choices
+   tButton1:addEventListener("touch", optionSelect1)
+  -- tButton2:addEventListener("touch", optionSelect2)
+   --tButton3:addEventListener("touch", optionSelect3)
 
-   
+   sceneGroup:insert(prompt)
+   sceneGroup:insert(option1)
+   --sceneGroup:insert(option2)
+   --sceneGroup:insert(option3)
+   sceneGroup:insert(tButton1)
+   --sceneGroup:insert(tButton2)
+   --sceneGroup:insert(tButton3)
 
-
-   -- Initialize the scene here.
-   -- Example: add display objects to "sceneGroup", add touch listeners, etc.
 end
  
--- "scene:show()"
 function scene:show( event )
  
    local sceneGroup = self.view
    local phase = event.phase
  
    if ( phase == "will" ) then
-      -- Called when the scene is still off screen (but is about to come on screen).
+
    elseif ( phase == "did" ) then
-      -- Called when the scene is now on screen.
-      -- Insert code here to make the scene come alive.
-      -- Example: start timers, begin animation, play audio, etc.
+
+      audio.pause()
+      --local bgm = audio.loadStream("title.wav")
+      --audio.play(bgm, {channel = 3, loops = -1})
+
    end
 end
  
--- "scene:hide()"
 function scene:hide( event )
  
    local sceneGroup = self.view
@@ -65,7 +121,6 @@ function scene:hide( event )
    end
 end
  
--- "scene:destroy()"
 function scene:destroy( event )
  
    local sceneGroup = self.view
