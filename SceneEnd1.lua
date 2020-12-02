@@ -4,17 +4,35 @@ local scene = composer.newScene()
 --local inventory = InventoryObj:new()
 local inventory = {}
 local widget = require( "widget" )
+local physics = require('physics');
+physics.start();
 local ping = audio.loadSound("ping.wav")
+local physics = require("physics")
 
 -- Text values declared here just to make them easy to access
 local promptText = "You have been killed."
 local choiceText1 = "Return to Title Screen"
---local choiceText2 = "Quit Game"
---local choiceText3 = "Credits"
+local choiceText2 = ""
+local choiceText3 = ""
+local prompt
+local option1
+local option2
+local option3
+local tButton1
+local tButton2
+local tButton3
 
 -- Function for button 1
-local function optionSelect1(event) 
-  
+local function optionSelect1() --optionSelect1(event) 
+   
+  --local reload_option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
+  --local reload_option2 = display.newText(choiceText2, display.contentCenterX, 345, 200, 0, "edo.ttf",12)
+  --local reload_option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
+     
+  prompt:setFillColor( 0, 0, 0 )
+  option1:setFillColor( 0, 0, 0 )
+  option2:setFillColor( 0, 0, 0 )
+  option3:setFillColor( 0, 0, 0 )
    audio.pause()
    audio.play(ping)
    local options = { effect = "fade", time = 1000, params = { inv = inventory } }
@@ -22,6 +40,18 @@ local function optionSelect1(event)
    print("Returning to Title Screen")
 
 end
+
+
+
+local function startPhysics(event)
+
+   --physics.addBody(tButton1, 'dynamic')
+   physics.addBody(tButton2, 'dynamic')
+   physics.addBody(tButton3, 'dynamic')
+   optionSelect1() 
+
+end
+
 
 -- Function for button 2
 local function optionSelect2(event) 
@@ -49,11 +79,6 @@ function scene:create( event )
  
    local sceneGroup = self.view
 
-   inventory = event.params.inv
-
-   inventory:setFlag("End1")
-   inventory:flagSave()
-
    local background = display.newImageRect( "DeathScene.png", display.contentWidth+100, display.contentHeight+200 )
    background.y=-100
    background.x =-100
@@ -62,37 +87,37 @@ function scene:create( event )
    sceneGroup:insert(background)
 
    -- text
-   local prompt  = display.newText(promptText, display.contentCenterX, 20, 300, 0,"edo.ttf",15)
-   local option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
-   --local option2 = display.newText(choiceText2, display.contentCenterX, 345, 200, 0, "edo.ttf",12)
-   --local option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
+    prompt  = display.newText(promptText, display.contentCenterX, 20, 300, 0,"edo.ttf",15)
+    option1 = display.newText(choiceText1, display.contentCenterX, 255, 200, 0, "edo.ttf",12)
+    option2 = display.newText(choiceText2, display.contentCenterX, 345, 200, 0, "edo.ttf",12)
+    option3 = display.newText(choiceText3, display.contentCenterX, 435, 200, 0, "edo.ttf",12)
       
    prompt:setFillColor( 0, 0, 0 )
    option1:setFillColor( 0, 0, 0 )
-   --option2:setFillColor( 0, 0, 0 )
-   --option3:setFillColor( 0, 0, 0 )
+   option2:setFillColor( 0, 0, 0 )
+   option3:setFillColor( 0, 0, 0 )
 
    -- buttons
-   local tButton1 = display.newRect(display.contentCenterX, 265, 480, 90)
-   --local tButton2 = display.newRect(display.contentCenterX, 355, 480, 90)
-   --local tButton3 = display.newRect(display.contentCenterX, 445, 480, 90)
+   tButton1 = display.newRect(display.contentCenterX, 265, 480, 90)
+   tButton2 = display.newRect(display.contentCenterX, 355, 480, 90)
+   tButton3 = display.newRect(display.contentCenterX, 445, 480, 90)
 
    tButton1.alpha = 0.2
-   --tButton2.alpha = 0.25
-   --tButton3.alpha = 0.2
+   tButton2.alpha = 0.25
+   tButton3.alpha = 0.2
 
    -- add conditions to the listeners to lock choices
-   tButton1:addEventListener("touch", optionSelect1)
-   --tButton2:addEventListener("touch", optionSelect2)
-   --tButton3:addEventListener("touch", optionSelect3)
+   tButton1:addEventListener("touch", startPhysics)--tButton1:addEventListener("touch", optionSelect1)
+   tButton2:addEventListener("touch", optionSelect2)
+   tButton3:addEventListener("touch", optionSelect3)
 
    sceneGroup:insert(prompt)
    sceneGroup:insert(option1)
-   --sceneGroup:insert(option2)
-   --sceneGroup:insert(option3)
+   sceneGroup:insert(option2)
+   sceneGroup:insert(option3)
    sceneGroup:insert(tButton1)
-   --sceneGroup:insert(tButton2)
-   --sceneGroup:insert(tButton3)
+   sceneGroup:insert(tButton2)
+   sceneGroup:insert(tButton3)
 
 end
  
